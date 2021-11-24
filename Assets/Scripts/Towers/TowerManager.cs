@@ -14,7 +14,8 @@ public class TowerManager : MonoBehaviour
     {
         for (int i = 0; i < TOWER_COUNT; i++)
         {
-            Vector3 pos = new Vector3(Mathf.Lerp(-xRange, xRange, (float)i / (TOWER_COUNT - 1)), transform.position.y, transform.position.z);
+            Vector3 pos = new Vector3(Mathf.Lerp(-xRange, xRange, (float)i / (TOWER_COUNT - 1)), 
+                transform.position.y, transform.position.z);
             towers[i] = Instantiate(towerPrefab, pos, Quaternion.identity, transform);
         }
     }
