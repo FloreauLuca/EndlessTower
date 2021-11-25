@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TowerManager : MonoBehaviour
 {
-    private const int TOWER_COUNT = 4;
+    private const int TOWER_COUNT = 2;
     [SerializeField] private GameObject towerPrefab;
     [SerializeField] private float xRange;
     private GameObject[] towers = new GameObject[TOWER_COUNT];

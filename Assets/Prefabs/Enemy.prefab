@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: -1}
-  yEndPosition: -3.5
+  yEndPosition: -2.5
 --- !u!1 &7101757077447922872
 GameObject:
   m_ObjectHideFlags: 0

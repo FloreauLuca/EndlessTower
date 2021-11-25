@@ -3,25 +3,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class ProjectileData
+{
+    public float speed = 5.0f;
+    public Vector2 direction = Vector2.up;
+    public float lifeTime = 5.0f;
+    public int damage = 1;
+    public float size = 0.5f;
+}
+
 public class Tower : MonoBehaviour
 {
     private SpriteRenderer mySpriteRenderer;
-    private const int POOL_SIZE = 20;
     [SerializeField] private GameObject projectile;
-    private GameObject[] projectilePool = new GameObject[POOL_SIZE];
 
     [SerializeField] private float fireRate = 0.5f;
     private float fireTimer = 0.0f;
 
     [SerializeField] private float fireRange = 2.0f;
+    
     [SerializeField] private LayerMask layerMask;
 
     private bool activated = false;
+
+    [SerializeField] private ProjectileData projectileData;
+    private ParticleSystem particleSystem;
 
     private void Start()
     {
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         mySpriteRenderer.color = Color.white;
+        particleSystem = GetComponent<ParticleSystem>();
     }
 
     private void Update()
@@ -53,12 +66,18 @@ public class Tower : MonoBehaviour
             mySpriteRenderer.color = Color.blue;
             if (fireTimer >= fireRate)
             {
-                GameObject gameObject = Instantiate(projectile, transform.position, transform.rotation, transform);
-                
-                gameObject.GetComponent<Projectile>().Direction =
-                    enemy.transform.position + 
-                    (Vector3)(enemy.Direction() * ((enemy.transform.position.y + 4.0f)/10.0f)) - 
-                    transform.position;
+                ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
+                Vector3 direction = enemy.transform.position +
+                                    (Vector3)(enemy.Direction() * ((enemy.transform.position.y + 4.0f) / 10.0f)) -
+                                    transform.position;
+                direction.Normalize();
+                emitParams.velocity = direction * projectileData.speed;
+
+
+                particleSystem.Emit(emitParams, 1);
+
+                //GameObject gameObject = Instantiate(projectile, transform.position, transform.rotation, transform);
+                //gameObject.GetComponent<Projectile>().Direction = direction ;
 
                 fireTimer = 0.0f;
             }
@@ -83,5 +102,11 @@ public class Tower : MonoBehaviour
     {
         Gizmos.color = activated ? Color.blue : Color.white;
         Gizmos.DrawWireSphere(transform.position, fireRange);
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        Debug.Log("ParticleTouch", gameObject);
+        other.GetComponent<Enemy>().TakeDamage(projectileData.damage);
     }
 }
