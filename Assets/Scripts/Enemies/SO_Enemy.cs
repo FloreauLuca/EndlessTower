@@ -14,4 +14,6 @@ public class SO_Enemy : ScriptableObject
 
     public float Damage = 10.0f;
 
+    public int Reward = 10;
+
 }

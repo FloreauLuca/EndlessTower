@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
     private int lifes = 5;
     private int money = 0;
 
+    private bool playing = true;
+
+    public bool Playing => playing;
+
     private void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
@@ -24,9 +28,15 @@ public class GameManager : MonoBehaviour
         uiManager.DisplayWave(wave.currentWaveCount, wave.currentEnemyCount, wave.enemyNb);
     }
 
-    public void AddMoney(int money)
+    public void AddMoney(int reward)
     {
-        money += this.money;
+        this.money += reward;
+        uiManager.DisplayMoney(money);
+    }
+
+    public void RemoveMoney(int price)
+    {
+        this.money -= price;
         uiManager.DisplayMoney(money);
     }
 
@@ -34,6 +44,10 @@ public class GameManager : MonoBehaviour
     {
         lifes--;
         uiManager.DisplayLife(lifes);
+        if (lifes <= 0)
+        {
+            playing = false;
+        }
     }
 
 }

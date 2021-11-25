@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     private SpriteRenderer mySpriteRenderer;
 
     private SO_Enemy enemyData;
+    public SO_Enemy EnemyData => enemyData;
 
     private float speed = 1.0f;
     [SerializeField] private Vector2 direction = Vector2.down;
@@ -78,6 +79,7 @@ public class Enemy : MonoBehaviour
         if (transform.position.y < yEndPosition)
         {
             Die();
+            FindObjectOfType<GameManager>().LooseLife();
         }
     }
 

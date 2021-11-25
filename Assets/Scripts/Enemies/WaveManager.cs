@@ -38,9 +38,9 @@ public class WaveManager : MonoBehaviour
         wave.currentWaveCount = currentWaveCount;
         wave.enemyNb = Mathf.RoundToInt( enemyNbCurve.Evaluate(currentWaveCount/100.0f));
         wave.enemyLife = Mathf.RoundToInt(enemyLifeCurve.Evaluate(currentWaveCount / 100.0f));
-        wave.spawnRate = Mathf.RoundToInt(spawnRateCurve.Evaluate(currentWaveCount / 100.0f));
-        wave.enemySpeed = Mathf.RoundToInt(enemySpeedCurve.Evaluate(currentWaveCount / 100.0f));
-        wave.enemyType = enemyType[Mathf.RoundToInt(enemyTypeCurve.Evaluate(currentWaveCount / 100.0f))];
+        wave.spawnRate = spawnRateCurve.Evaluate(currentWaveCount / 100.0f);
+        wave.enemySpeed = enemySpeedCurve.Evaluate(currentWaveCount / 100.0f);
+        wave.enemyType = enemyType[Mathf.RoundToInt(enemyTypeCurve.Evaluate(currentWaveCount / 100.0f))%3];
         wave.currentEnemyCount = 0;
         gameManager.UpdateWave(wave);
         return wave;

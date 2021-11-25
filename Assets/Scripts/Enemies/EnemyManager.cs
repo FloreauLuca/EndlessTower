@@ -97,9 +97,9 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (!gameManager.Playing)
         {
-            SpawnEnemy();
+            return;
         }
 
         if (currentWave.enemyNb > currentWave.currentEnemyCount)
@@ -122,6 +122,7 @@ public class EnemyManager : MonoBehaviour
                 timer = 0.0f;
             }
         }
+        
 
     }
 
@@ -143,6 +144,7 @@ public class EnemyManager : MonoBehaviour
 
     public void Kill(Enemy enemy)
     {
+        gameManager.AddMoney(enemy.EnemyData.Reward);
         Destroy(enemy.gameObject);
     }
 
