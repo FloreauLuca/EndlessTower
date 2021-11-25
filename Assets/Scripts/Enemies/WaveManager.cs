@@ -19,6 +19,13 @@ public class WaveManager : MonoBehaviour
     private int currentWaveCount = 0;
     [SerializeField] private List<SO_Enemy> enemyType = new List<SO_Enemy>();
     private GameManager gameManager;
+
+    [SerializeField] private AnimationCurve enemyNbCurve;
+    [SerializeField] private AnimationCurve enemyLifeCurve;
+    [SerializeField] private AnimationCurve spawnRateCurve;
+    [SerializeField] private AnimationCurve enemySpeedCurve;
+    [SerializeField] private AnimationCurve enemyTypeCurve;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -29,11 +36,11 @@ public class WaveManager : MonoBehaviour
         currentWaveCount++;
         Wave wave = new Wave();
         wave.currentWaveCount = currentWaveCount;
-        wave.enemyNb = currentWaveCount + 5;
-        wave.enemyLife = Mathf.CeilToInt(currentWaveCount / 2.0f);
-        wave.spawnRate = 0.5f - currentWaveCount / 100.0f;
-        wave.enemySpeed = currentWaveCount/10.0f + 5;
-        wave.enemyType = enemyType[currentWaveCount%3];
+        wave.enemyNb = Mathf.RoundToInt( enemyNbCurve.Evaluate(currentWaveCount/100.0f));
+        wave.enemyLife = Mathf.RoundToInt(enemyLifeCurve.Evaluate(currentWaveCount / 100.0f));
+        wave.spawnRate = Mathf.RoundToInt(spawnRateCurve.Evaluate(currentWaveCount / 100.0f));
+        wave.enemySpeed = Mathf.RoundToInt(enemySpeedCurve.Evaluate(currentWaveCount / 100.0f));
+        wave.enemyType = enemyType[Mathf.RoundToInt(enemyTypeCurve.Evaluate(currentWaveCount / 100.0f))];
         wave.currentEnemyCount = 0;
         gameManager.UpdateWave(wave);
         return wave;
