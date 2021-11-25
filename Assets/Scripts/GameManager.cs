@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     
     private int money = 0;
+    public int Money => money;
 
     private bool playing = true;
 

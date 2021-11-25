@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpgradeRate : MonoBehaviour
+public class UpgradeRate : UpgradeButton
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        
+        base.Start();
+        price = tower.RatePrice;
     }
 
-    // Update is called once per frame
-    void Update()
+    protected override void Upgrade()
     {
-        
+        tower.UpgradeRate();
+        price = tower.RatePrice;
     }
 }

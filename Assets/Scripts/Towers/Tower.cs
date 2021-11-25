@@ -16,7 +16,6 @@ public class ProjectileData
 public class Tower : MonoBehaviour
 {
     private SpriteRenderer mySpriteRenderer;
-    [SerializeField] private GameObject projectile;
 
     [SerializeField] private float fireRate = 0.5f;
     private float fireTimer = 0.0f;
@@ -30,11 +29,24 @@ public class Tower : MonoBehaviour
     [SerializeField] private ProjectileData projectileData;
     private ParticleSystem particleSystem;
 
+    private int rateLevel = 1;
+    private int speedLevel = 1;
+
+    private int ratePrice;
+    public int RatePrice => ratePrice;
+    private int speedPrice;
+    public int SpeedPrice => speedPrice;
+
+    private GameManager gameManager;
+
     private void Start()
     {
+        ratePrice = rateLevel * 10;
+        speedPrice = speedLevel * 10;
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         mySpriteRenderer.color = Color.white;
         particleSystem = GetComponent<ParticleSystem>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     private void Update()
@@ -108,5 +120,21 @@ public class Tower : MonoBehaviour
     {
         Debug.Log("ParticleTouch", gameObject);
         other.GetComponent<Enemy>().TakeDamage(projectileData.damage);
+    }
+    
+    public void UpgradeRate()
+    {
+        fireRate -= 0.1f;
+        gameManager.RemoveMoney(ratePrice);
+        rateLevel++;
+        ratePrice = rateLevel * 10;
+    }
+
+    public void UpgradeSpeed()
+    {
+        projectileData.speed += 0.1f;
+        gameManager.RemoveMoney(speedPrice);
+        speedLevel++;
+        speedPrice = speedLevel * 10;
     }
 }
