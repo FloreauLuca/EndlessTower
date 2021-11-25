@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI moneyText;
+    [SerializeField] private TextMeshProUGUI lifeText;
+
+    public void DisplayWave(int waveCount, int enemyCount, int totalEnemy)
     {
-        
+        waveText.text = "Wave : " + waveCount.ToString() + " " + enemyCount + "/" + totalEnemy;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void DisplayMoney(int money)
     {
-        
+        moneyText.text = ("Money : " + money);
+    }
+
+    public void DisplayLife(int life)
+    {
+        lifeText.text = ("Lifes : " + life);
     }
 }

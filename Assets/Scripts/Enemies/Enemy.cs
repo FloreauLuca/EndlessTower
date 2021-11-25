@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,17 +22,30 @@ public class Enemy : MonoBehaviour
 
     private SO_Enemy enemyData;
 
-    [SerializeField] private float speed = 1.0f;
+    private float speed = 1.0f;
     [SerializeField] private Vector2 direction = Vector2.down;
     [SerializeField] private float yEndPosition = -4.0f;
 
-    [SerializeField] private float maxLife = 5;
+    private float maxLife = 5;
     private float currentLife = 5;
+    private EnemyManager enemyManager;
+    public EnemyManager EnemyManager
+    {
+        get => enemyManager;
+        set => enemyManager = value;
+    }
 
-    void Start()
+    void Awake()
     {
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    public void Spawn(float speed, int lifes, SO_Enemy enemySO)
+    {
+        maxLife = lifes;
+        this.speed = speed;
         currentLife = maxLife;
+        enemyData = enemySO;
         mySpriteRenderer.color = Color.Lerp(Color.red, Color.yellow, currentLife / maxLife);
     }
 
@@ -79,7 +93,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        enemyManager.Kill(this);
     }
 
     public Vector2 Direction()

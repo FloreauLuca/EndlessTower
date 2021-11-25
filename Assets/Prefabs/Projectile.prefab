@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   direction: {x: 0, y: 1}
-  yEndPosition: 5
+  maxDist: 5
   damage: 1
   size: 0.125
   layerMask:

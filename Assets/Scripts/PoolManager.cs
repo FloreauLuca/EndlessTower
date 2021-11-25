@@ -9,7 +9,7 @@ public class PoolManager
     private Transform spawner;
 
 
-    private GameObject[] pool;
+    public GameObject[] pool;
     private bool[] poolActive;
 
     public PoolManager(int poolSize, GameObject prefab, Transform spawner)
@@ -20,7 +20,7 @@ public class PoolManager
         this.spawner = spawner;
     }
 
-    void SpawnPool()
+    public void SpawnPool()
     {
         for (int i = 0; i < poolSize; i++)
         {
@@ -29,7 +29,7 @@ public class PoolManager
         }
     }
 
-    GameObject GetNewObject()
+    public GameObject ActiveObject()
     {
         for (int i = 0; i < poolActive.Length; i++)
         {
@@ -39,10 +39,11 @@ public class PoolManager
                 return pool[i];
             }
         }
+        Debug.LogError(spawner.gameObject + " pool is empty");
         return null;
     }
 
-    void FreeObject(GameObject gameObject)
+    public void FreeObject(GameObject gameObject)
     {
         for (int i = 0; i < pool.Length; i++)
         {

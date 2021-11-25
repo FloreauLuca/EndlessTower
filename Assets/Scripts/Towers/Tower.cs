@@ -57,7 +57,7 @@ public class Tower : MonoBehaviour
                 
                 gameObject.GetComponent<Projectile>().Direction =
                     enemy.transform.position + 
-                    (Vector3)(enemy.Direction() * 0.2f) - 
+                    (Vector3)(enemy.Direction() * ((enemy.transform.position.y + 4.0f)/10.0f)) - 
                     transform.position;
 
                 fireTimer = 0.0f;

@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 3898349795792283112, guid: e7828cf519672ec478f0eb54f14aca4c, type: 3}
   fireRate: 0.2
-  fireRange: 7.5
+  fireRange: 5
   layerMask:
     serializedVersion: 2
     m_Bits: 8
