@@ -1,8 +1,10 @@
+//#define USE_POOL
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
 
 #if USE_POOL
 public class EnemyPoolManager
@@ -76,6 +78,7 @@ public class EnemyManager : MonoBehaviour
 
     private Wave currentWave = new Wave();
     private float timer = 0.0f;
+    private bool isWaiting = true;
 #if USE_POOL
     private EnemyPoolManager pool;
 #endif
@@ -101,7 +104,17 @@ public class EnemyManager : MonoBehaviour
         {
             return;
         }
+        if (isWaiting)
+        {
+            timer += Time.deltaTime;
+            if (timer > pauseDuration)
+            {
+                isWaiting = false;
+                timer = 0.0f;
+            }
 
+            return;
+        }
         if (currentWave.enemyNb > currentWave.currentEnemyCount)
         {
             timer += Time.deltaTime;
@@ -115,12 +128,9 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            timer += Time.deltaTime;
-            if (timer > pauseDuration)
-            {
-                CalculateNewWave();
-                timer = 0.0f;
-            }
+            isWaiting = true;
+            timer = 0.0f;
+            CalculateNewWave();;
         }
         
 
@@ -129,6 +139,7 @@ public class EnemyManager : MonoBehaviour
 #if USE_POOL
     public void Kill(Enemy enemy)
     {
+        gameManager.AddMoney(enemy.EnemyData.Reward);
         pool.FreeObject(enemy);
     }
 
@@ -136,9 +147,9 @@ public class EnemyManager : MonoBehaviour
     {
         Vector3 pos = transform.position + Vector3.right * Random.Range(-xRange, xRange);
         Enemy newEnemy = pool.ActiveObject();
-        newEnemy.transform.position = pos;
-        newEnemy.EnemyData = enemyType[0];
-        newEnemy.Spawn();
+        newEnemy.transform.position = pos; 
+        newEnemy.EnemyManager = this;
+        newEnemy.Spawn(currentWave.enemySpeed, currentWave.enemyLife, currentWave.enemyType);
     }
 #else
 
@@ -153,7 +164,7 @@ public class EnemyManager : MonoBehaviour
         Vector3 pos = transform.position + Vector3.right * Random.Range(-xRange, xRange);
         Enemy newEnemy = Instantiate(enemyPrefab, pos, Quaternion.identity, transform).GetComponent<Enemy>();
         newEnemy.EnemyManager = this;
-        newEnemy.Spawn(currentWave.enemySpeed, currentWave.enemyLife, currentWave.enemyType);
+        newEnemy.Spawn(0, currentWave.enemySpeed, currentWave.enemyLife, currentWave.enemyType);
 
     }
 #endif
@@ -161,5 +172,14 @@ public class EnemyManager : MonoBehaviour
     void CalculateNewWave()
     {
         currentWave = waveManager.CalculateNextWave();
+        isWaiting = true;
+        timer = 0.0f;
+    }
+
+    public void ResetWave(Wave wave)
+    {
+        currentWave = wave;
+        isWaiting = true;
+        timer = 0.0f;
     }
 }

@@ -118,7 +118,6 @@ public class Tower : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        Debug.Log("ParticleTouch", gameObject);
         other.GetComponent<Enemy>().TakeDamage(projectileData.damage);
     }
     

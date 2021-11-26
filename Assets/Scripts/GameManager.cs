@@ -7,7 +7,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private UIManager uiManager;
-    
+    private WaveManager waveManager;
+
     private int money = 0;
     public int Money => money;
 
@@ -18,8 +19,14 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
+        waveManager = FindObjectOfType<WaveManager>();
         uiManager.DisplayWave(0, 0, 0);
         uiManager.DisplayMoney(money);
+    }
+
+    public void DisplayNewWave(int waveCount)
+    {
+        uiManager.DisplayNewWave(waveCount);
     }
 
     public void UpdateWave(Wave wave)
@@ -41,7 +48,7 @@ public class GameManager : MonoBehaviour
 
     public void LooseLife()
     {
-        playing = false;
+        waveManager.ResetWave();
     }
 
 }

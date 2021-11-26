@@ -19,6 +19,7 @@ public class WaveManager : MonoBehaviour
     private int currentWaveCount = 0;
     [SerializeField] private List<SO_Enemy> enemyType = new List<SO_Enemy>();
     private GameManager gameManager;
+    private EnemyManager enemyManager;
 
     [SerializeField] private AnimationCurve enemyNbCurve;
     [SerializeField] private AnimationCurve enemyLifeCurve;
@@ -29,6 +30,7 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
+        enemyManager = FindObjectOfType<EnemyManager>();
     }
 
     public Wave CalculateNextWave()
@@ -43,7 +45,15 @@ public class WaveManager : MonoBehaviour
         wave.enemyType = enemyType[Mathf.RoundToInt(enemyTypeCurve.Evaluate(currentWaveCount / 100.0f))%3];
         wave.currentEnemyCount = 0;
         gameManager.UpdateWave(wave);
+        gameManager.DisplayNewWave(currentWaveCount);
         return wave;
+    }
+
+    public void ResetWave()
+    {
+        currentWaveCount--;
+        enemyManager.ResetWave(CalculateNextWave());
+        gameManager.DisplayNewWave(currentWaveCount);
     }
 
 }

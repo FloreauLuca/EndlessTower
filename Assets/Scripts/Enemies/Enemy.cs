@@ -5,18 +5,13 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public enum SpriteType
-    {
-        TRIANGLE,
-        CIRCLE,
-        SQUARE
-    }
-
     public enum DirectionType
     {
         WAVES,
         STRAIGHT
     }
+
+    private int id = 0;
 
     private SpriteRenderer mySpriteRenderer;
 
@@ -41,35 +36,35 @@ public class Enemy : MonoBehaviour
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void Spawn(float speed, int lifes, SO_Enemy enemySO)
+    public void Spawn(int id, float speed, int lifes, SO_Enemy enemySO)
     {
+        this.id = id;
         maxLife = lifes;
         this.speed = speed;
         currentLife = maxLife;
         enemyData = enemySO;
-        mySpriteRenderer.color = Color.Lerp(Color.red, Color.yellow, currentLife / maxLife);
+        mySpriteRenderer.color = Color.Lerp(Color.red, enemyData.Color, currentLife / maxLife);
+        mySpriteRenderer.sprite = enemyData.Sprite;
     }
 
     void FixedUpdate()
     {
         if (!enemyData)
         {
-            transform.position += (Vector3)direction * (speed * Time.fixedDeltaTime);
+            Die();
         }
-        else
+
+        switch(enemyData.DirectionType)
         {
-            switch(enemyData.DirectionType)
-            {
-                case DirectionType.STRAIGHT:
-                    transform.position += (Vector3) direction * (speed * Time.fixedDeltaTime);
+            case DirectionType.STRAIGHT:
+                transform.position += (Vector3) direction * (speed * Time.fixedDeltaTime);
+            break;
+            case DirectionType.WAVES:
+                //transform.position += (Vector3)direction * (speed * Time.fixedDeltaTime);
                 break;
-                case DirectionType.WAVES:
-                    //transform.position += (Vector3)direction * (speed * Time.fixedDeltaTime);
-                    break;
-                default:
-                    transform.position += (Vector3)direction * (speed * Time.fixedDeltaTime);
-                    break;
-            }
+            default:
+                transform.position += (Vector3)direction * (speed * Time.fixedDeltaTime);
+                break;
         }
 
     }
@@ -86,7 +81,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentLife -= damage;
-        mySpriteRenderer.color = Color.Lerp(Color.red, Color.yellow, currentLife / maxLife);
+        mySpriteRenderer.color = Color.Lerp(Color.red, enemyData.Color, currentLife / maxLife);
         if (currentLife <= 0)
         {
             Die();

@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class SO_Enemy : ScriptableObject
 {
-    public Enemy.SpriteType EnemyType = Enemy.SpriteType.CIRCLE;
+    public Sprite Sprite;
+
+    public Color Color;
 
     public Enemy.DirectionType DirectionType = Enemy.DirectionType.STRAIGHT;
 
