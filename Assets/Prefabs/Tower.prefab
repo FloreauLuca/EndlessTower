@@ -139,7 +139,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   projectileData:
-    speed: 5
+    speed: 20
     direction: {x: 0, y: 1}
     lifeTime: 5
     damage: 1
@@ -5092,10 +5092,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1857772945306260866}
-  - component: {fileID: 919086176}
   - component: {fileID: 4169099669777153452}
+  - component: {fileID: 1142960058}
   m_Layer: 0
-  m_Name: UpgradeSpeed
+  m_Name: UpgradeDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5117,21 +5117,6 @@ Transform:
   m_Father: {fileID: 3255174124410970155}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &919086176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6891813814521529099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d338e819d853774fb6c00e71e1ab3a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tower: {fileID: 720060840019980427}
-  pressedColor: {r: 0.39741948, g: 0.8773585, b: 0.26072446, a: 1}
-  unAvailableColor: {r: 0.5366453, g: 0.6698113, b: 0.5213154, a: 1}
 --- !u!61 &4169099669777153452
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5158,6 +5143,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
+--- !u!114 &1142960058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6891813814521529099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab03fcb8315f2c49b67516e3ffcef5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 720060840019980427}
+  pressedColor: {r: 0, g: 1, b: 0.25371575, a: 1}
+  unAvailableColor: {r: 0.4745906, g: 0.745283, b: 0.48541763, a: 1}
 --- !u!1 &7255466099559098303
 GameObject:
   m_ObjectHideFlags: 0

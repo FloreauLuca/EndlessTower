@@ -31,11 +31,14 @@ public class Tower : MonoBehaviour
 
     private int rateLevel = 1;
     private int speedLevel = 1;
+    private int damageLevel = 1;
 
     private int ratePrice;
     public int RatePrice => ratePrice;
     private int speedPrice;
     public int SpeedPrice => speedPrice;
+    private int damagePrice;
+    public int DamagePrice => damagePrice;
 
     private GameManager gameManager;
 
@@ -79,11 +82,12 @@ public class Tower : MonoBehaviour
             if (fireTimer >= fireRate)
             {
                 ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
-                Vector3 direction = enemy.transform.position +
-                                    (Vector3)(enemy.Direction() * ((enemy.transform.position.y + 4.0f) / 10.0f)) -
-                                    transform.position;
+                Vector3 direction = enemy.transform.position -
+                                    transform.position + 
+                                    (Vector3) enemy.Direction() * 0.01f;
                 direction.Normalize();
                 emitParams.velocity = direction * projectileData.speed;
+                emitParams.startLifetime = fireRange / projectileData.speed;
 
 
                 particleSystem.Emit(emitParams, 1);
@@ -124,6 +128,7 @@ public class Tower : MonoBehaviour
     public void UpgradeRate()
     {
         fireRate -= 0.1f;
+        projectileData.speed += 0.1f;
         gameManager.RemoveMoney(ratePrice);
         rateLevel++;
         ratePrice = rateLevel * 10;
@@ -135,5 +140,13 @@ public class Tower : MonoBehaviour
         gameManager.RemoveMoney(speedPrice);
         speedLevel++;
         speedPrice = speedLevel * 10;
+    }
+
+    public void UpgradeDamage()
+    {
+        projectileData.damage += 0.5f;
+        gameManager.RemoveMoney(damagePrice);
+        damageLevel++;
+        damagePrice = damageLevel * 10;
     }
 }

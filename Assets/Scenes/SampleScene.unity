@@ -560,6 +560,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerPrefab: {fileID: 3255174124410970154, guid: c0e7ef438952eb74dbdee7e86dadda02, type: 3}
   xRange: 2
+  activeTower: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,8 +1710,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.5195341
     - serializedVersion: 3
-      time: 0.10152394
-      value: 0.5007962
+      time: 0.100120135
+      value: 0.24304473
       inSlope: -0.25592732
       outSlope: -0.25592732
       tangentMode: 0
@@ -1718,8 +1719,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.01542006
     - serializedVersion: 3
-      time: 1.0007935
-      value: 0.13359451
+      time: 1.0002441
+      value: 0.05514908
       inSlope: -0.0020995478
       outSlope: -0.0020995478
       tangentMode: 0
