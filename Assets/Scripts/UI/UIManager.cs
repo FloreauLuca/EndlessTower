@@ -6,12 +6,18 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI waveProgressText;
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private WaveDisplay waveDisplay;
 
-    public void DisplayWave(int waveCount, int enemyCount, int totalEnemy)
+    public void DisplayWaveCount(int waveCount)
     {
-        waveText.text = "Wave : " + waveCount.ToString() + " " + enemyCount + "/" + totalEnemy;
+        waveText.text = "Wave : " + waveCount.ToString();
+    }
+
+    public void DisplayWaveProgress(int enemyCount, int totalEnemy)
+    {
+        waveProgressText.text = enemyCount + "/" + totalEnemy;
     }
 
     public void DisplayMoney(int money)

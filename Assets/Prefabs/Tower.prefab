@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ab6aa0953c9704fbb2b7069d73aff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.2
+  fireRate: 0.4
   fireRange: 5
   layerMask:
     serializedVersion: 2

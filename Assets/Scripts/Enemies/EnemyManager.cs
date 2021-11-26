@@ -1,4 +1,3 @@
-//#define USE_POOL
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +5,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 
-#if USE_POOL
 public class EnemyPoolManager
 {
     private int poolSize = 20;
@@ -15,7 +13,7 @@ public class EnemyPoolManager
     private Transform enemyManagerTransform;
 
 
-    public Enemy[] pool;
+    private Enemy[] pool;
     private bool[] poolActive;
 
     public EnemyPoolManager(int poolSize, GameObject prefab, EnemyManager enemyManager)
@@ -33,13 +31,13 @@ public class EnemyPoolManager
         for (int i = 0; i < poolSize; i++)
         {
             pool[i] = GameObject.Instantiate(prefab, enemyManagerTransform.position, enemyManagerTransform.rotation, enemyManagerTransform).GetComponent<Enemy>();
-            pool[i].EnemyManager = enemyManager;
+            pool[i].Init(enemyManager, i);
             pool[i].gameObject.SetActive(false);
             poolActive[i] = false;
         }
     }
 
-    public Enemy ActiveObject()
+    public int ActiveObject()
     {
         for (int i = 0; i < poolActive.Length; i++)
         {
@@ -47,27 +45,25 @@ public class EnemyPoolManager
             {
                 poolActive[i] = true;
                 pool[i].gameObject.SetActive(true);
-                return pool[i];
+                return i;
             }
         }
         Debug.LogError(enemyManagerTransform.gameObject + " pool is empty");
-        return null;
+        return -1;
     }
 
-    public void FreeObject(Enemy gameObject)
+    public void FreeObject(int enemyId)
     {
-        for (int i = 0; i < pool.Length; i++)
-        {
-            if (pool[i].GetInstanceID() == gameObject.GetInstanceID())
-            {
-                poolActive[i] = false;
-                pool[i].gameObject.SetActive(false);
-                return;
-            }
-        }
+        poolActive[enemyId] = false;
+        pool[enemyId].transform.position = enemyManagerTransform.position;
+        pool[enemyId].gameObject.SetActive(false);
+    }
+
+    public Enemy GetEnemy(int id)
+    {
+        return pool[id];
     }
 }
-#endif
 
 public class EnemyManager : MonoBehaviour
 {
@@ -79,9 +75,7 @@ public class EnemyManager : MonoBehaviour
     private Wave currentWave = new Wave();
     private float timer = 0.0f;
     private bool isWaiting = true;
-#if USE_POOL
     private EnemyPoolManager pool;
-#endif
 
     private WaveManager waveManager;
 
@@ -89,10 +83,8 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-#if USE_POOL
         pool = new EnemyPoolManager(20, enemyPrefab, this);
         pool.SpawnPool();
-#endif
 
         waveManager = FindObjectOfType<WaveManager>();
         gameManager = FindObjectOfType<GameManager>();
@@ -115,18 +107,17 @@ public class EnemyManager : MonoBehaviour
 
             return;
         }
-        if (currentWave.enemyNb > currentWave.currentEnemyCount)
+        if (currentWave.enemyNb > currentWave.currentEnemySpawned)
         {
             timer += Time.deltaTime;
             if (timer > currentWave.spawnRate)
             {
                 SpawnEnemy();
                 timer = 0.0f;
-                currentWave.currentEnemyCount++;
-                gameManager.UpdateWave(currentWave);
+                currentWave.currentEnemySpawned++;
             }
         }
-        else
+        if (currentWave.enemyNb <= currentWave.currentEnemyKilled)
         {
             isWaiting = true;
             timer = 0.0f;
@@ -135,39 +126,23 @@ public class EnemyManager : MonoBehaviour
         
 
     }
-
-#if USE_POOL
-    public void Kill(Enemy enemy)
+    
+    public void Kill(int enemyId)
     {
-        gameManager.AddMoney(enemy.EnemyData.Reward);
-        pool.FreeObject(enemy);
+        gameManager.AddMoney(pool.GetEnemy(enemyId).EnemyData.Reward);
+        pool.FreeObject(enemyId);
+        currentWave.currentEnemyKilled++;
+        gameManager.DisplayWaveProgress(currentWave.currentEnemyKilled, currentWave.enemyNb);
     }
 
     private void SpawnEnemy()
     {
         Vector3 pos = transform.position + Vector3.right * Random.Range(-xRange, xRange);
-        Enemy newEnemy = pool.ActiveObject();
+        int enemyId = pool.ActiveObject();
+        Enemy newEnemy = pool.GetEnemy(enemyId);
         newEnemy.transform.position = pos; 
-        newEnemy.EnemyManager = this;
         newEnemy.Spawn(currentWave.enemySpeed, currentWave.enemyLife, currentWave.enemyType);
     }
-#else
-
-    public void Kill(Enemy enemy)
-    {
-        gameManager.AddMoney(enemy.EnemyData.Reward);
-        Destroy(enemy.gameObject);
-    }
-
-    private void SpawnEnemy()
-    {
-        Vector3 pos = transform.position + Vector3.right * Random.Range(-xRange, xRange);
-        Enemy newEnemy = Instantiate(enemyPrefab, pos, Quaternion.identity, transform).GetComponent<Enemy>();
-        newEnemy.EnemyManager = this;
-        newEnemy.Spawn(0, currentWave.enemySpeed, currentWave.enemyLife, currentWave.enemyType);
-
-    }
-#endif
 
     void CalculateNewWave()
     {

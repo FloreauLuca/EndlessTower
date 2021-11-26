@@ -25,18 +25,19 @@ public class Enemy : MonoBehaviour
     private float maxLife = 5;
     private float currentLife = 5;
     private EnemyManager enemyManager;
-    public EnemyManager EnemyManager
-    {
-        get => enemyManager;
-        set => enemyManager = value;
-    }
 
     void Awake()
     {
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    public void Spawn(int id, float speed, int lifes, SO_Enemy enemySO)
+    public void Init(EnemyManager enemyManager, int id)
+    {
+        this.enemyManager = enemyManager;
+        this.id = id;
+    }
+
+    public void Spawn(float speed, int lifes, SO_Enemy enemySO)
     {
         this.id = id;
         maxLife = lifes;
@@ -45,6 +46,7 @@ public class Enemy : MonoBehaviour
         enemyData = enemySO;
         mySpriteRenderer.color = Color.Lerp(Color.red, enemyData.Color, currentLife / maxLife);
         mySpriteRenderer.sprite = enemyData.Sprite;
+        Debug.Log("Spawn " + currentLife);
     }
 
     void FixedUpdate()
@@ -81,6 +83,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentLife -= damage;
+        Debug.Log("TakeDamage " + currentLife);
         mySpriteRenderer.color = Color.Lerp(Color.red, enemyData.Color, currentLife / maxLife);
         if (currentLife <= 0)
         {
@@ -90,7 +93,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        enemyManager.Kill(this);
+        enemyManager.Kill(id);
     }
 
     public Vector2 Direction()

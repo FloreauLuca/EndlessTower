@@ -20,18 +20,25 @@ public class GameManager : MonoBehaviour
     {
         uiManager = FindObjectOfType<UIManager>();
         waveManager = FindObjectOfType<WaveManager>();
-        uiManager.DisplayWave(0, 0, 0);
+        uiManager.DisplayWaveCount(0);
+        uiManager.DisplayWaveProgress(0, 0);
         uiManager.DisplayMoney(money);
     }
 
     public void DisplayNewWave(int waveCount)
     {
         uiManager.DisplayNewWave(waveCount);
+        DisplayWaveCount(waveCount);
     }
 
-    public void UpdateWave(Wave wave)
+    public void DisplayWaveCount(int waveCount)
     {
-        uiManager.DisplayWave(wave.currentWaveCount, wave.currentEnemyCount, wave.enemyNb);
+        uiManager.DisplayWaveCount(waveCount);
+    }
+
+    public void DisplayWaveProgress(int currentEnemyCount, int enemyNb)
+    {
+        uiManager.DisplayWaveProgress(currentEnemyCount, enemyNb);
     }
 
     public void AddMoney(int reward)

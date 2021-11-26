@@ -8,7 +8,8 @@ public class Wave
     public int currentWaveCount = 0;
     public int enemyNb = 5;
     public int enemyLife = 5;
-    public int currentEnemyCount = 5;
+    public int currentEnemySpawned = 5;
+    public int currentEnemyKilled = 5;
     public float spawnRate = 0.5f;
     public float enemySpeed = 5.0f;
     public SO_Enemy enemyType;
@@ -43,9 +44,10 @@ public class WaveManager : MonoBehaviour
         wave.spawnRate = spawnRateCurve.Evaluate(currentWaveCount / 100.0f);
         wave.enemySpeed = enemySpeedCurve.Evaluate(currentWaveCount / 100.0f);
         wave.enemyType = enemyType[Mathf.RoundToInt(enemyTypeCurve.Evaluate(currentWaveCount / 100.0f))%3];
-        wave.currentEnemyCount = 0;
-        gameManager.UpdateWave(wave);
+        wave.currentEnemyKilled = 0;
+        wave.currentEnemySpawned = 0;
         gameManager.DisplayNewWave(currentWaveCount);
+        gameManager.DisplayWaveProgress(wave.currentEnemyKilled, wave.enemyNb);
         return wave;
     }
 

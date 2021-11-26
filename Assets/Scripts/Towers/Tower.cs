@@ -9,7 +9,7 @@ public class ProjectileData
     public float speed = 5.0f;
     public Vector2 direction = Vector2.up;
     public float lifeTime = 5.0f;
-    public int damage = 1;
+    public float damage = 1;
     public float size = 0.5f;
 }
 
