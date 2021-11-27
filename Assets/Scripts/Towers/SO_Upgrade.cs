@@ -12,7 +12,6 @@ public class SO_Upgrade : ScriptableObject
         ADD_CANON,
         ADD_TOURET,
         INC_SIZE,
-        INC_SIDE_SIZE,
         INC_RANGE,
         INC_REVENUE
     }

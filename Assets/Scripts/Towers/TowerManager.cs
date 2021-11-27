@@ -25,7 +25,7 @@ public class TowerManager : MonoBehaviour
         AddTower();
     }
 
-    void AddTower()
+    public void AddTower()
     {
         activeTower++;
         float xCurrentRange = (xRange/4) * (activeTower - 1);

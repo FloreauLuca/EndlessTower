@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,6 +12,43 @@ public class ProjectileData
     public float damage = 1;
     public float size = 0.5f;
     public float rewardMult = 1.0f;
+}
+
+[Serializable]
+public class UpgradeData
+{
+    [SerializeField] private AnimationCurve upgradeCurve;
+    private int level = 1;
+    public int Level => level;
+
+    public virtual void AddLevel()
+    {
+        level++;
+    }
+
+    public virtual float GetUpgradeValue()
+    {
+        return upgradeCurve.Evaluate(level);
+    }
+}
+
+[Serializable]
+public class UpgradePricedData : UpgradeData
+{
+    [SerializeField] private AnimationCurve priceCurve;
+    private int price = 10;
+    public int Price => price;
+    
+    public void UpdatePrice()
+    {
+        price = Mathf.FloorToInt(priceCurve.Evaluate(Level));
+    }
+
+    public override void AddLevel()
+    {
+        base.AddLevel();
+        UpdatePrice();
+    }
 }
 
 public class Tower : MonoBehaviour
@@ -29,22 +65,26 @@ public class Tower : MonoBehaviour
     private bool activated = false;
     [SerializeField] private int canonCount = 1;
     [SerializeField] private float canonSeperation = 0.05f;
-    [SerializeField] private bool sideCanon = false;
-    [SerializeField] private float sideCanonAngle = 45.0f;
+    [SerializeField] private int sideCanon = 0;
+    [SerializeField] private float sideCanonAngle = 20.0f;
 
     [SerializeField] private ProjectileData projectileData;
     private ParticleSystem particleSystem;
-
-    private int rateLevel = 1;
-    private int speedLevel = 1;
-    private int damageLevel = 1;
-
-    private int ratePrice;
-    public int RatePrice => ratePrice;
-    private int speedPrice;
-    public int SpeedPrice => speedPrice;
-    private int damagePrice;
-    public int DamagePrice => damagePrice;
+    
+    [SerializeField] private UpgradePricedData rateUpgrade;
+    public UpgradePricedData RateUpgrade => rateUpgrade;
+    [SerializeField] private UpgradePricedData damageUpgrade;
+    public UpgradePricedData DamageUpgrade => damageUpgrade;
+    [SerializeField] private UpgradeData sizeUpgrade;
+    public UpgradeData SizeUpgrade => sizeUpgrade;
+    [SerializeField] private UpgradeData rangeUpgrade;
+    public UpgradeData RangeUpgrade => rangeUpgrade;
+    [SerializeField] private UpgradeData revenueUpgrade;
+    public UpgradeData RevenueUpgrade => revenueUpgrade;
+    [SerializeField] private UpgradeData speedUpgrade;
+    public UpgradeData SpeedUpgrade => speedUpgrade;
+    [SerializeField] private UpgradeData sideUpgrade;
+    public UpgradeData SideUpgrade => sideUpgrade;
 
     private GameManager gameManager;
 
@@ -59,14 +99,26 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
-        ratePrice = rateLevel * 10;
-        speedPrice = speedLevel * 10;
+        UpdateAfterUpgrade();
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         mySpriteRenderer.color = Color.white;
         particleSystem = GetComponent<ParticleSystem>();
         gameManager = FindObjectOfType<GameManager>();
         lvlText.text = towerLevel.ToString();
         choicePanel = FindObjectOfType<ChoicePanel>();
+    }
+
+    private void UpdateAfterUpgrade()
+    {
+        rateUpgrade.UpdatePrice();
+        fireRate = rateUpgrade.GetUpgradeValue();
+        damageUpgrade.UpdatePrice();
+        projectileData.damage = damageUpgrade.GetUpgradeValue();
+        projectileData.size = sizeUpgrade.GetUpgradeValue();
+        fireRange = rangeUpgrade.GetUpgradeValue();
+        projectileData.rewardMult = revenueUpgrade.GetUpgradeValue();
+        projectileData.speed = speedUpgrade.GetUpgradeValue();
+        sideCanonAngle = sideUpgrade.GetUpgradeValue();
     }
 
     public Vector2 RotateVec(Vector2 v, float delta)
@@ -123,15 +175,17 @@ public class Tower : MonoBehaviour
                     emitParams.position = Vector3.right * xPos;
                     particleSystem.Emit(emitParams, 1);
                 }
-                if (sideCanon)
+                for (int i = 1; i <= sideCanon; i++)
                 {
-                    Vector2 directionR = RotateVec(direction, -sideCanonAngle * Mathf.Deg2Rad);
+                    emitParams.startSize = projectileData.size / 2.0f;
+
+                    float sideAngle = Mathf.LerpAngle(0, sideCanonAngle, ((float)i / sideCanon));
+                    Vector2 directionR = RotateVec(direction, -sideAngle * Mathf.Deg2Rad);
                     directionR.Normalize();
                     emitParams.velocity = directionR * projectileData.speed;
                     emitParams.position = Vector3.right * xRange;
                     particleSystem.Emit(emitParams, 1);
-
-                    Vector2 directionL = RotateVec(direction, sideCanonAngle * Mathf.Deg2Rad);
+                    Vector2 directionL = RotateVec(direction, sideAngle * Mathf.Deg2Rad);
                     directionL.Normalize();
                     emitParams.velocity = directionL * projectileData.speed;
                     emitParams.position = Vector3.right * -xRange;
@@ -173,27 +227,17 @@ public class Tower : MonoBehaviour
     
     public void UpgradeRate()
     {
+        gameManager.RemoveMoney(rateUpgrade.Price);
+        rateUpgrade.AddLevel();
         fireRate -= 0.1f;
         projectileData.speed += 0.1f;
-        gameManager.RemoveMoney(ratePrice);
-        rateLevel++;
-        ratePrice = rateLevel * 10;
-    }
-
-    public void UpgradeSpeed()
-    {
-        projectileData.speed += 0.1f;
-        gameManager.RemoveMoney(speedPrice);
-        speedLevel++;
-        speedPrice = speedLevel * 10;
     }
 
     public void UpgradeDamage()
     {
+        gameManager.RemoveMoney(damageUpgrade.Price);
+        damageUpgrade.AddLevel();
         projectileData.damage += 0.5f;
-        gameManager.RemoveMoney(damagePrice);
-        damageLevel++;
-        damagePrice = damageLevel * 10;
     }
 
     public void Kill (int reward, float experience)
@@ -232,5 +276,34 @@ public class Tower : MonoBehaviour
     public void ValidateUpgrade(int choice)
     {
         lastUpgradeLvl += levelBetweenUpgrade;
+        switch (upgradesChoices[choice].UpgradeType)
+        {
+            case SO_Upgrade.UpgradeTypeEnum.SIDE:
+                sideCanon++;
+                sideUpgrade.AddLevel();
+                break;
+            case SO_Upgrade.UpgradeTypeEnum.ADD_CANON:
+                canonCount++;
+                break;
+            case SO_Upgrade.UpgradeTypeEnum.ADD_TOURET:
+                FindObjectOfType<TowerManager>().AddTower();
+                break;
+            case SO_Upgrade.UpgradeTypeEnum.INC_SIZE:
+                sizeUpgrade.AddLevel();
+                break;
+            case SO_Upgrade.UpgradeTypeEnum.INC_RANGE:
+                rangeUpgrade.AddLevel();
+                break;
+            case SO_Upgrade.UpgradeTypeEnum.INC_REVENUE:
+                revenueUpgrade.AddLevel();
+                break;
+            default:
+                break;
+        }
+        UpdateAfterUpgrade();
+        if (upgradesChoices.Count > 2)
+        {
+            upgradesChoices.RemoveAt(choice);
+        }
     }
 }

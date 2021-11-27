@@ -121,7 +121,7 @@ public class EnemyManager : MonoBehaviour
         {
             isWaiting = true;
             timer = 0.0f;
-            CalculateNewWave();;
+            CalculateNewWave();
         }
         
 

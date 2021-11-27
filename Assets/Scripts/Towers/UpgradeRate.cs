@@ -7,14 +7,14 @@ public class UpgradeRate : UpgradeButton
     protected override void Start()
     {
         base.Start();
-        price = tower.RatePrice;
+        price = tower.RateUpgrade.Price;
         UpdatePrice();
     }
 
     protected override void Upgrade()
     {
         tower.UpgradeRate();
-        price = tower.RatePrice;
+        price = tower.RateUpgrade.Price;
         UpdatePrice();
     }
 }
