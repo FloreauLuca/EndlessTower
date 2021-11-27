@@ -127,9 +127,13 @@ public class EnemyManager : MonoBehaviour
 
     }
     
-    public void Kill(int enemyId)
+    public void Kill(int enemyId, Tower tower)
     {
-        gameManager.AddMoney(pool.GetEnemy(enemyId).EnemyData.Reward);
+        if (tower)
+        {
+            tower.Kill(pool.GetEnemy(enemyId).EnemyData.Reward, pool.GetEnemy(enemyId).EnemyData.Experience);
+        }
+
         pool.FreeObject(enemyId);
         currentWave.currentEnemyKilled++;
         gameManager.DisplayWaveProgress(currentWave.currentEnemyKilled, currentWave.enemyNb);

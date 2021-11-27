@@ -8,11 +8,13 @@ public class UpgradeDamage : UpgradeButton
     {
         base.Start();
         price = tower.DamagePrice;
+        UpdatePrice();
     }
 
     protected override void Upgrade()
     {
         tower.UpgradeDamage();
         price = tower.DamagePrice;
+        UpdatePrice();
     }
 }

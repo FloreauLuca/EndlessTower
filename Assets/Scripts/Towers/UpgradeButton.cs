@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UpgradeButton : MonoBehaviour
@@ -13,6 +14,7 @@ public class UpgradeButton : MonoBehaviour
     private GameManager gameManager;
     protected int price;
     private bool available = true;
+    [SerializeField] private TextMeshPro priceText;
 
     protected virtual void Start()
     {
@@ -36,6 +38,11 @@ public class UpgradeButton : MonoBehaviour
 
     protected virtual void Upgrade()
     {
+    }
+
+    protected void UpdatePrice()
+    {
+        priceText.text = price.ToString();
     }
 
     private void OnMouseDown()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [Serializable]
@@ -11,6 +12,7 @@ public class ProjectileData
     public float lifeTime = 5.0f;
     public float damage = 1;
     public float size = 0.5f;
+    public float rewardMult = 1.0f;
 }
 
 public class Tower : MonoBehaviour
@@ -25,6 +27,10 @@ public class Tower : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
 
     private bool activated = false;
+    [SerializeField] private int canonCount = 1;
+    [SerializeField] private float canonSeperation = 0.05f;
+    [SerializeField] private bool sideCanon = false;
+    [SerializeField] private float sideCanonAngle = 45.0f;
 
     [SerializeField] private ProjectileData projectileData;
     private ParticleSystem particleSystem;
@@ -42,6 +48,11 @@ public class Tower : MonoBehaviour
 
     private GameManager gameManager;
 
+    private int towerLevel;
+    private float towerExp;
+    [SerializeField] private float expToNextLvl = 100.0f;
+    [SerializeField] private TextMeshPro lvlText;
+
     private void Start()
     {
         ratePrice = rateLevel * 10;
@@ -50,6 +61,15 @@ public class Tower : MonoBehaviour
         mySpriteRenderer.color = Color.white;
         particleSystem = GetComponent<ParticleSystem>();
         gameManager = FindObjectOfType<GameManager>();
+        lvlText.text = towerLevel.ToString();
+    }
+
+    public Vector2 RotateVec(Vector2 v, float delta)
+    {
+        return new Vector2(
+            v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
+            v.x * Mathf.Sin(delta) + v.y * Mathf.Cos(delta)
+        );
     }
 
     private void Update()
@@ -88,9 +108,30 @@ public class Tower : MonoBehaviour
                 direction.Normalize();
                 emitParams.velocity = direction * projectileData.speed;
                 emitParams.startLifetime = fireRange / projectileData.speed;
+                emitParams.startSize = projectileData.size;
 
+                float xRange = canonSeperation * (canonCount - 1);
+                for (int i = 0; i < canonCount; i++)
+                {
+                    float percent = canonCount > 1 ? (float)i / (canonCount - 1) : 0;
+                    float xPos = Mathf.Lerp(-xRange, xRange, percent);
+                    emitParams.position = Vector3.right * xPos;
+                    particleSystem.Emit(emitParams, 1);
+                }
+                if (sideCanon)
+                {
+                    Vector2 directionR = RotateVec(direction, -sideCanonAngle * Mathf.Deg2Rad);
+                    directionR.Normalize();
+                    emitParams.velocity = directionR * projectileData.speed;
+                    emitParams.position = Vector3.right * xRange;
+                    particleSystem.Emit(emitParams, 1);
 
-                particleSystem.Emit(emitParams, 1);
+                    Vector2 directionL = RotateVec(direction, sideCanonAngle * Mathf.Deg2Rad);
+                    directionL.Normalize();
+                    emitParams.velocity = directionL * projectileData.speed;
+                    emitParams.position = Vector3.right * -xRange;
+                    particleSystem.Emit(emitParams, 1);
+                }
 
                 //GameObject gameObject = Instantiate(projectile, transform.position, transform.rotation, transform);
                 //gameObject.GetComponent<Projectile>().Direction = direction ;
@@ -122,7 +163,7 @@ public class Tower : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        other.GetComponent<Enemy>().TakeDamage(projectileData.damage);
+        other.GetComponent<Enemy>().TakeDamage(projectileData.damage, this);
     }
     
     public void UpgradeRate()
@@ -148,5 +189,22 @@ public class Tower : MonoBehaviour
         gameManager.RemoveMoney(damagePrice);
         damageLevel++;
         damagePrice = damageLevel * 10;
+    }
+
+    public void Kill (int reward, float experience)
+    {
+        gameManager.AddMoney(reward);
+        towerExp += experience;
+        if (towerExp > expToNextLvl)
+        {
+            NewLevel();
+        }
+    }
+
+    public void NewLevel()
+    {
+        towerExp = 0.0f;
+        towerLevel++;
+        lvlText.text = towerLevel.ToString();
     }
 }

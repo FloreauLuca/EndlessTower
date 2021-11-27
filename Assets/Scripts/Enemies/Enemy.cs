@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     private float speed = 1.0f;
     [SerializeField] private Vector2 direction = Vector2.down;
     [SerializeField] private float yEndPosition = -4.0f;
+    [SerializeField] private Color deathColor = Color.red;
 
     private float maxLife = 5;
     private float currentLife = 5;
@@ -44,7 +45,7 @@ public class Enemy : MonoBehaviour
         this.speed = speed;
         currentLife = maxLife;
         enemyData = enemySO;
-        mySpriteRenderer.color = Color.Lerp(Color.red, enemyData.Color, currentLife / maxLife);
+        mySpriteRenderer.color = Color.Lerp(deathColor, enemyData.Color, currentLife / maxLife);
         mySpriteRenderer.sprite = enemyData.Sprite;
         Debug.Log("Spawn " + currentLife);
     }
@@ -53,7 +54,7 @@ public class Enemy : MonoBehaviour
     {
         if (!enemyData)
         {
-            Die();
+            Die(null);
         }
 
         switch(enemyData.DirectionType)
@@ -75,25 +76,24 @@ public class Enemy : MonoBehaviour
     {
         if (transform.position.y < yEndPosition)
         {
-            Die();
+            Die(null);
             FindObjectOfType<GameManager>().LooseLife();
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Tower tower)
     {
         currentLife -= damage;
-        Debug.Log("TakeDamage " + currentLife);
-        mySpriteRenderer.color = Color.Lerp(Color.red, enemyData.Color, currentLife / maxLife);
+        mySpriteRenderer.color = Color.Lerp(deathColor, enemyData.Color, currentLife / maxLife);
         if (currentLife <= 0)
         {
-            Die();
+            Die(tower);
         }
     }
 
-    private void Die()
+    private void Die(Tower tower)
     {
-        enemyManager.Kill(id);
+        enemyManager.Kill(id, tower);
     }
 
     public Vector2 Direction()

@@ -8,11 +8,13 @@ public class UpgradeRate : UpgradeButton
     {
         base.Start();
         price = tower.RatePrice;
+        UpdatePrice();
     }
 
     protected override void Upgrade()
     {
         tower.UpgradeRate();
         price = tower.RatePrice;
+        UpdatePrice();
     }
 }

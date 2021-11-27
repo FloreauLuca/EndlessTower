@@ -8,11 +8,13 @@ public class UpgradeSpeed : UpgradeButton
     {
         base.Start();
         price = tower.SpeedPrice;
+        UpdatePrice();
     }
 
     protected override void Upgrade()
     {
         tower.UpgradeSpeed();
         price = tower.SpeedPrice;
+        UpdatePrice();
     }
 }
