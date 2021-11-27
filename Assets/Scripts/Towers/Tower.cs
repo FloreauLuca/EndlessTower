@@ -88,11 +88,11 @@ public class Tower : MonoBehaviour
 
     private GameManager gameManager;
 
-    private int towerLevel = 0;
+    private int towerLevel = 1;
     private float towerExp = 0.0f;
-    [SerializeField] private float expToNextLvl = 100.0f;
+    [SerializeField] private AnimationCurve expToNextLvl;
     [SerializeField] private TextMeshPro lvlText;
-    [SerializeField] private int levelBetweenUpgrade = 5;
+    [SerializeField] private AnimationCurve levelBetweenUpgrade;
     private int lastUpgradeLvl = 0;
     private ChoicePanel choicePanel;
     [SerializeField] private List<SO_Upgrade> upgradesChoices;
@@ -244,7 +244,7 @@ public class Tower : MonoBehaviour
     {
         gameManager.AddMoney(reward);
         towerExp += experience;
-        if (towerExp > expToNextLvl)
+        if (towerExp > expToNextLvl.Evaluate(towerLevel))
         {
             NewLevel();
             towerExp = 0.0f;
@@ -260,7 +260,7 @@ public class Tower : MonoBehaviour
 
     public bool CheckUpgrade()
     {
-        if (towerLevel - lastUpgradeLvl >= levelBetweenUpgrade)
+        if (towerLevel - lastUpgradeLvl >= Mathf.FloorToInt( levelBetweenUpgrade.Evaluate(towerLevel)))
         {
             return true;
         }
@@ -275,7 +275,7 @@ public class Tower : MonoBehaviour
 
     public void ValidateUpgrade(int choice)
     {
-        lastUpgradeLvl += levelBetweenUpgrade;
+        lastUpgradeLvl += Mathf.FloorToInt(levelBetweenUpgrade.Evaluate(towerLevel));
         switch (upgradesChoices[choice].UpgradeType)
         {
             case SO_Upgrade.UpgradeTypeEnum.SIDE:

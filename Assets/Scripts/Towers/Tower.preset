@@ -1,0 +1,1175 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Tower
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 10ab6aa0953c9704fbb2b7069d73aff7, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: fireRate
+    value: 0.4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: fireRange
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: layerMask.m_Bits
+    value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: canonCount
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: canonSeperation
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideCanon
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideCanonAngle
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: projectileData.speed
+    value: 20
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: projectileData.direction.x
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: projectileData.direction.y
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: projectileData.lifeTime
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: projectileData.damage
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: projectileData.size
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: projectileData.rewardMult
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[0].time
+    value: 0.08748233
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[0].value
+    value: 0.49880588
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[0].inSlope
+    value: -0.030581854
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[0].outSlope
+    value: -0.030581854
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[0].inWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[0].outWeight
+    value: 0.42061296
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[1].time
+    value: 10.025712
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[1].value
+    value: 0.2523439
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[1].inSlope
+    value: -0.010301795
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[1].outSlope
+    value: -0.010301795
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[1].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[1].outWeight
+    value: 0.021030465
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[2].time
+    value: 99.99706
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[2].value
+    value: 0.010160475
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[2].inSlope
+    value: -0.00054255646
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[2].outSlope
+    value: -0.00054255646
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[2].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[2].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[2].inWeight
+    value: 0.0026135768
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_Curve.Array.data[2].outWeight
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.upgradeCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[0].time
+    value: -0.00262697
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[0].value
+    value: 0.00625
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[0].inSlope
+    value: 10.157054
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[0].outSlope
+    value: 10.157054
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[0].outWeight
+    value: 0.9925023
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[1].time
+    value: 99.539276
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[1].value
+    value: 998.3974
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[1].inSlope
+    value: 9.930061
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[1].outSlope
+    value: 9.930061
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[1].inWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rateUpgrade.priceCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[0].time
+    value: 0.99919957
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[0].value
+    value: 4.9996033
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[0].inSlope
+    value: 0.48767376
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[0].outSlope
+    value: 0.48767376
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[0].outWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[1].time
+    value: 99.713715
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[1].value
+    value: 49.92579
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[1].inSlope
+    value: 0.5189344
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[1].outSlope
+    value: 0.5189344
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[1].inWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.upgradeCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[0].time
+    value: -0.00262697
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[0].value
+    value: 0.00625
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[0].inSlope
+    value: 10.157054
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[0].outSlope
+    value: 10.157054
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[0].outWeight
+    value: 0.9925023
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[1].time
+    value: 99.539276
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[1].value
+    value: 998.3974
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[1].inSlope
+    value: 9.930061
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[1].outSlope
+    value: 9.930061
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[1].inWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: damageUpgrade.priceCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[0].time
+    value: 0.9991242
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[0].value
+    value: 0.5125
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[0].inSlope
+    value: 0.12951264
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[0].outSlope
+    value: 0.12951264
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[0].outWeight
+    value: 0.9989057
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[1].time
+    value: 5.0036373
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[1].value
+    value: 1.0305678
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[1].inSlope
+    value: 0.13183655
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[1].outSlope
+    value: 0.13183655
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[1].inWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sizeUpgrade.upgradeCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[0].time
+    value: 1.0001688
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[0].value
+    value: 4.999936
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[0].inSlope
+    value: 1.0158137
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[0].outSlope
+    value: 1.0158137
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[0].outWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[1].time
+    value: 3.0002825
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[1].value
+    value: 7.0341444
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[1].inSlope
+    value: 1.0196519
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[1].outSlope
+    value: 1.0196519
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[1].inWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rangeUpgrade.upgradeCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[0].time
+    value: 0.9999999
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[0].value
+    value: 1.0009247
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[0].inSlope
+    value: 0.4895898
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[0].outSlope
+    value: 0.4895898
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[0].outWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[1].time
+    value: 3.0015936
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[1].value
+    value: 1.9942358
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[1].inSlope
+    value: 0.49270752
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[1].outSlope
+    value: 0.49270752
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[1].inWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: revenueUpgrade.upgradeCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[0].time
+    value: 1.0283515
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[0].value
+    value: 20.127556
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[0].inSlope
+    value: 0.45842203
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[0].outSlope
+    value: 0.45842203
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[0].outWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[1].time
+    value: 99.94735
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[1].value
+    value: 49.830357
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[1].inSlope
+    value: 0.44993272
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[1].outSlope
+    value: 0.44993272
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[1].inWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: speedUpgrade.upgradeCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.size
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[0].time
+    value: 1.0030355
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[0].value
+    value: 19.977148
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[0].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[0].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[0].tangentMode
+    value: 136
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[0].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[1].time
+    value: 2.0016687
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[1].value
+    value: 30.032907
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[1].inSlope
+    value: 10.075444
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[1].outSlope
+    value: 10.075444
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[1].tangentMode
+    value: 136
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[1].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[2].time
+    value: 2.9961736
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[2].value
+    value: 40.0589
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[2].inSlope
+    value: 7.4912796
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[2].outSlope
+    value: 7.4912796
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[2].tangentMode
+    value: 136
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[2].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[2].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[2].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[3].time
+    value: 4.0072403
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[3].value
+    value: 45.057205
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[3].inSlope
+    value: 4.9535484
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[3].outSlope
+    value: 4.9535484
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[3].tangentMode
+    value: 136
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[3].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[3].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[3].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[4].time
+    value: 4.9954004
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[4].value
+    value: 49.962166
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[4].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[4].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[4].tangentMode
+    value: 136
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[4].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[4].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_Curve.Array.data[4].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: sideUpgrade.upgradeCurve.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.size
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[0].time
+    value: 1.0001876
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[0].value
+    value: 100.00295
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[0].inSlope
+    value: 5.4572344
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[0].outSlope
+    value: 5.4572344
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[0].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[0].outWeight
+    value: 0.9932238
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[1].time
+    value: 19.87858
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[1].value
+    value: 201.4155
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[1].inSlope
+    value: 5.3656907
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[1].outSlope
+    value: 5.3656907
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[1].tangentMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[1].inWeight
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: expToNextLvl.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: lvlText
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.size
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[0].time
+    value: 0.9977031
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[0].value
+    value: 5.014283
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[0].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[0].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[0].tangentMode
+    value: 136
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[0].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[0].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[0].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[1].time
+    value: 25.00528
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[1].value
+    value: 5.1083875
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[1].inSlope
+    value: 0.015065596
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[1].outSlope
+    value: 0.015065596
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[1].tangentMode
+    value: 136
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[1].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[1].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[1].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[2].time
+    value: 25.98292
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[2].value
+    value: 10.061231
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[2].inSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[2].outSlope
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[2].tangentMode
+    value: 136
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[2].weightedMode
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[2].inWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_Curve.Array.data[2].outWeight
+    value: 0.33333334
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_PreInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_PostInfinity
+    value: 2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: levelBetweenUpgrade.m_RotationOrder
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.size
+    value: 11
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[0]
+    value: 
+    objectReference: {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[1]
+    value: 
+    objectReference: {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[2]
+    value: 
+    objectReference: {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[3]
+    value: 
+    objectReference: {fileID: 11400000, guid: e59b868a80e48734cb4fe2338e00e580, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[4]
+    value: 
+    objectReference: {fileID: 11400000, guid: cf1527fa1426dd14ea0b638bc9b87d17, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[5]
+    value: 
+    objectReference: {fileID: 11400000, guid: 4dd14e4e466f4764198998bed0b4b688, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[6]
+    value: 
+    objectReference: {fileID: 11400000, guid: cf1527fa1426dd14ea0b638bc9b87d17, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[7]
+    value: 
+    objectReference: {fileID: 11400000, guid: 1d5c4524252a64242996d7c53b495913, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[8]
+    value: 
+    objectReference: {fileID: 11400000, guid: efcd642659218fb4b9e06480d530523e, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[9]
+    value: 
+    objectReference: {fileID: 11400000, guid: 4dd14e4e466f4764198998bed0b4b688, type: 2}
+  - target: {fileID: 0}
+    propertyPath: upgradesChoices.Array.data[10]
+    value: 
+    objectReference: {fileID: 11400000, guid: cf1527fa1426dd14ea0b638bc9b87d17, type: 2}
+  m_ExcludedProperties: []

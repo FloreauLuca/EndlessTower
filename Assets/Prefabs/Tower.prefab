@@ -753,9 +753,64 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  expToNextLvl: 10
+  expToNextLvl:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1.0001876
+      value: 100.00295
+      inSlope: 5.4572344
+      outSlope: 5.4572344
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.9932238
+    - serializedVersion: 3
+      time: 19.87858
+      value: 201.4155
+      inSlope: 5.3656907
+      outSlope: 5.3656907
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   lvlText: {fileID: 6787270297865193601}
-  levelBetweenUpgrade: 1
+  levelBetweenUpgrade:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.9977031
+      value: 5.014283
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25.00528
+      value: 5.1083875
+      inSlope: 0.015065596
+      outSlope: 0.015065596
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25.98292
+      value: 10.061231
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   upgradesChoices:
   - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
   - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}

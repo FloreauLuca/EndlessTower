@@ -22,10 +22,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Vector2 direction = Vector2.down;
     [SerializeField] private float yEndPosition = -4.0f;
     [SerializeField] private Color deathColor = Color.red;
+    [SerializeField] private float frequency = 0.1f;
+    [SerializeField] private float amplify = 1.0f;
 
     private float maxLife = 5;
     private float currentLife = 5;
     private EnemyManager enemyManager;
+
+    private float timer = 0.0f;
 
     void Awake()
     {
@@ -41,8 +45,8 @@ public class Enemy : MonoBehaviour
     public void Spawn(float speed, int lifes, SO_Enemy enemySO)
     {
         this.id = id;
-        maxLife = lifes;
-        this.speed = speed;
+        maxLife = lifes * enemySO.Life;
+        this.speed = speed * enemySO.Speed;
         currentLife = maxLife;
         enemyData = enemySO;
         mySpriteRenderer.color = Color.Lerp(deathColor, enemyData.Color, currentLife / maxLife);
@@ -51,6 +55,7 @@ public class Enemy : MonoBehaviour
 
     void FixedUpdate()
     {
+        timer += Time.fixedDeltaTime;
         if (!enemyData)
         {
             Die(null);
@@ -62,7 +67,8 @@ public class Enemy : MonoBehaviour
                 transform.position += (Vector3) direction * (speed * Time.fixedDeltaTime);
             break;
             case DirectionType.WAVES:
-                //transform.position += (Vector3)direction * (speed * Time.fixedDeltaTime);
+                Vector3 newDirection = direction + Vector2.right * (Mathf.Sin(timer * speed * frequency) * amplify);
+                transform.position += (Vector3)newDirection * (speed * Time.fixedDeltaTime);
                 break;
             default:
                 transform.position += (Vector3)direction * (speed * Time.fixedDeltaTime);
