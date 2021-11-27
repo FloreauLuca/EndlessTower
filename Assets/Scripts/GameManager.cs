@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     private UIManager uiManager;
     private WaveManager waveManager;
+    private TowerManager towerManager;
 
     private int money = 0;
     public int Money => money;
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     {
         uiManager = FindObjectOfType<UIManager>();
         waveManager = FindObjectOfType<WaveManager>();
+        towerManager = FindObjectOfType<TowerManager>();
         uiManager.DisplayWaveCount(0);
         uiManager.DisplayWaveProgress(0, 0);
         uiManager.DisplayMoney(money);
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
 
     public void DisplayNewWave(int waveCount)
     {
+        playing = !towerManager.CheckUpdates();
         uiManager.DisplayNewWave(waveCount);
         DisplayWaveCount(waveCount);
     }
@@ -58,4 +61,8 @@ public class GameManager : MonoBehaviour
         waveManager.ResetWave();
     }
 
+    public void UpdatesDone()
+    {
+        playing = true;
+    }
 }

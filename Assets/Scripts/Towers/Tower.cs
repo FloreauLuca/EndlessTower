@@ -48,10 +48,14 @@ public class Tower : MonoBehaviour
 
     private GameManager gameManager;
 
-    private int towerLevel;
-    private float towerExp;
+    private int towerLevel = 0;
+    private float towerExp = 0.0f;
     [SerializeField] private float expToNextLvl = 100.0f;
     [SerializeField] private TextMeshPro lvlText;
+    [SerializeField] private int levelBetweenUpgrade = 5;
+    private int lastUpgradeLvl = 0;
+    private ChoicePanel choicePanel;
+    [SerializeField] private List<SO_Upgrade> upgradesChoices;
 
     private void Start()
     {
@@ -62,6 +66,7 @@ public class Tower : MonoBehaviour
         particleSystem = GetComponent<ParticleSystem>();
         gameManager = FindObjectOfType<GameManager>();
         lvlText.text = towerLevel.ToString();
+        choicePanel = FindObjectOfType<ChoicePanel>();
     }
 
     public Vector2 RotateVec(Vector2 v, float delta)
@@ -198,6 +203,7 @@ public class Tower : MonoBehaviour
         if (towerExp > expToNextLvl)
         {
             NewLevel();
+            towerExp = 0.0f;
         }
     }
 
@@ -206,5 +212,25 @@ public class Tower : MonoBehaviour
         towerExp = 0.0f;
         towerLevel++;
         lvlText.text = towerLevel.ToString();
+    }
+
+    public bool CheckUpgrade()
+    {
+        if (towerLevel - lastUpgradeLvl >= levelBetweenUpgrade)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public void DisplayUpgrades()
+    {
+        choicePanel.Display(this, upgradesChoices[0], upgradesChoices[1]);
+    }
+
+    public void ValidateUpgrade(int choice)
+    {
+        lastUpgradeLvl += levelBetweenUpgrade;
     }
 }

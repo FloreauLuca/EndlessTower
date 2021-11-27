@@ -494,8 +494,12 @@ MonoBehaviour:
     damage: 1
     size: 0.5
     rewardMult: 1
-  expToNextLvl: 100
+  expToNextLvl: 10
   lvlText: {fileID: 6787270297865193601}
+  levelBetweenUpgrade: 1
+  upgradesChoices:
+  - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
+  - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
 --- !u!198 &5207650683817039246
 ParticleSystem:
   m_ObjectHideFlags: 0

@@ -47,7 +47,6 @@ public class Enemy : MonoBehaviour
         enemyData = enemySO;
         mySpriteRenderer.color = Color.Lerp(deathColor, enemyData.Color, currentLife / maxLife);
         mySpriteRenderer.sprite = enemyData.Sprite;
-        Debug.Log("Spawn " + currentLife);
     }
 
     void FixedUpdate()
