@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 720060840019980427}
   - component: {fileID: 5207650683817039246}
   - component: {fileID: 7934217238159878639}
+  - component: {fileID: 4771698474406934681}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -478,22 +479,70 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ab6aa0953c9704fbb2b7069d73aff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.4
-  fireRange: 5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
   canonCount: 1
   canonSeperation: 0.2
   sideCanon: 0
-  sideCanonAngle: 20
-  projectileData:
-    speed: 20
-    direction: {x: 0, y: 1}
-    lifeTime: 5
-    damage: 1
-    size: 0.5
-    rewardMult: 1
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  expToNextLvl:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 1.0001876
+      value: 100.00295
+      inSlope: 5.4572344
+      outSlope: 5.4572344
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.9932238
+    - serializedVersion: 3
+      time: 19.87858
+      value: 201.4155
+      inSlope: 5.3656907
+      outSlope: 5.3656907
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  lvlText: {fileID: 6787270297865193601}
+  levelBetweenUpgrade:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.9977031
+      value: 5.014283
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25.00528
+      value: 5.1083875
+      inSlope: 0.015065596
+      outSlope: 0.015065596
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 25.98292
+      value: 10.061231
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   rateUpgrade:
     upgradeCurve:
       serializedVersion: 2
@@ -501,21 +550,30 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0.08748233
         value: 0.49880588
-        inSlope: -0.030581854
-        outSlope: -0.030581854
+        inSlope: -0.010941514
+        outSlope: -0.010941514
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.42061296
+        outWeight: 0.59504056
       - serializedVersion: 3
-        time: 10.025712
-        value: 0.2523439
-        inSlope: -0.010301795
-        outSlope: -0.010301795
+        time: 9.938226
+        value: 0.405041
+        inSlope: -0.004907176
+        outSlope: -0.004907176
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.021030465
+        outWeight: 0.9984177
+      - serializedVersion: 3
+        time: 50.018208
+        value: 0.20807472
+        inSlope: -0.0049613514
+        outSlope: -0.0049613514
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 1
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 99.99706
         value: 0.010160475
@@ -557,8 +615,8 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.99919957
-        value: 4.9996033
+        time: 1.0490654
+        value: 1.058342
         inSlope: 0.48767376
         outSlope: 0.48767376
         tangentMode: 0
@@ -566,8 +624,17 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 1
       - serializedVersion: 3
-        time: 99.713715
-        value: 49.92579
+        time: 9.989829
+        value: 4.997174
+        inSlope: 0.48829776
+        outSlope: 0.48829776
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 100.31448
+        value: 50.5763
         inSlope: 0.5189344
         outSlope: 0.5189344
         tangentMode: 0
@@ -753,76 +820,24 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  expToNextLvl:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1.0001876
-      value: 100.00295
-      inSlope: 5.4572344
-      outSlope: 5.4572344
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.9932238
-    - serializedVersion: 3
-      time: 19.87858
-      value: 201.4155
-      inSlope: 5.3656907
-      outSlope: 5.3656907
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  lvlText: {fileID: 6787270297865193601}
-  levelBetweenUpgrade:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.9977031
-      value: 5.014283
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 25.00528
-      value: 5.1083875
-      inSlope: 0.015065596
-      outSlope: 0.015065596
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 25.98292
-      value: 10.061231
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  upgradesChoices:
-  - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
-  - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
+  upgradesOrder:
+  - {fileID: 11400000, guid: cf1527fa1426dd14ea0b638bc9b87d17, type: 2}
+  - {fileID: 11400000, guid: 4dd14e4e466f4764198998bed0b4b688, type: 2}
   - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
   - {fileID: 11400000, guid: e59b868a80e48734cb4fe2338e00e580, type: 2}
-  - {fileID: 11400000, guid: cf1527fa1426dd14ea0b638bc9b87d17, type: 2}
-  - {fileID: 11400000, guid: 4dd14e4e466f4764198998bed0b4b688, type: 2}
-  - {fileID: 11400000, guid: cf1527fa1426dd14ea0b638bc9b87d17, type: 2}
   - {fileID: 11400000, guid: 1d5c4524252a64242996d7c53b495913, type: 2}
-  - {fileID: 11400000, guid: efcd642659218fb4b9e06480d530523e, type: 2}
-  - {fileID: 11400000, guid: 4dd14e4e466f4764198998bed0b4b688, type: 2}
   - {fileID: 11400000, guid: cf1527fa1426dd14ea0b638bc9b87d17, type: 2}
+  - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
+  - {fileID: 11400000, guid: 4dd14e4e466f4764198998bed0b4b688, type: 2}
+  - {fileID: 11400000, guid: efcd642659218fb4b9e06480d530523e, type: 2}
+  - {fileID: 11400000, guid: 5d7999100eeabce4499279586317dd75, type: 2}
+  - {fileID: 11400000, guid: cf1527fa1426dd14ea0b638bc9b87d17, type: 2}
+  - {fileID: 11400000, guid: e59b868a80e48734cb4fe2338e00e580, type: 2}
+  - {fileID: 11400000, guid: 4dd14e4e466f4764198998bed0b4b688, type: 2}
+  - {fileID: 11400000, guid: 1d5c4524252a64242996d7c53b495913, type: 2}
+  infiniteUpgrades:
+  - {fileID: 11400000, guid: 4dd14e4e466f4764198998bed0b4b688, type: 2}
+  - {fileID: 11400000, guid: 1d5c4524252a64242996d7c53b495913, type: 2}
 --- !u!198 &5207650683817039246
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5603,6 +5618,32 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!61 &4771698474406934681
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3255174124410970154}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &3255174125216731080
 GameObject:
   m_ObjectHideFlags: 0
@@ -5676,10 +5717,10 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b7312fef7f0e7744587f24dbdc8d841b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5

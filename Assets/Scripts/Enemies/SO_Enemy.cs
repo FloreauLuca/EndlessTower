@@ -19,4 +19,6 @@ public class SO_Enemy : ScriptableObject
     public int Reward = 10;
 
     public float Experience = 10.0f;
+
+    public float Size = 1.0f;
 }

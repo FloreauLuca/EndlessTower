@@ -2,13 +2,14 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class ProjectileData
 {
     public float speed = 5.0f;
     public Vector2 direction = Vector2.up;
-    public float lifeTime = 5.0f;
     public float damage = 1;
     public float size = 0.5f;
     public float rewardMult = 1.0f;
@@ -55,22 +56,33 @@ public class Tower : MonoBehaviour
 {
     private SpriteRenderer mySpriteRenderer;
 
-    [SerializeField] private float fireRate = 0.5f;
-    private float fireTimer = 0.0f;
-
-    [SerializeField] private float fireRange = 2.0f;
-    
-    [SerializeField] private LayerMask layerMask;
+    private GameManager gameManager;
 
     private bool activated = false;
+
+    [Header("Canon Parameter")]
+    private ParticleSystem projectileParticleSystem;
     [SerializeField] private int canonCount = 1;
     [SerializeField] private float canonSeperation = 0.05f;
     [SerializeField] private int sideCanon = 0;
-    [SerializeField] private float sideCanonAngle = 20.0f;
-
-    [SerializeField] private ProjectileData projectileData;
-    private ParticleSystem particleSystem;
+    private float sideCanonAngle = 20.0f;
+    private float fireRate = 0.5f;
+    private float fireTimer = 0.0f;
+    private float fireRange = 2.0f;
     
+    [SerializeField] private LayerMask enemyLayerMask;
+    private Enemy nearestEnemy = null;
+
+    [Header("Levels Parameter")]
+    private int towerLevel = 1;
+    private float towerExp = 0.0f;
+    [SerializeField] private AnimationCurve expToNextLvl;
+    [SerializeField] private TextMeshPro lvlText;
+    [SerializeField] private AnimationCurve levelBetweenUpgrade;
+    private int lastUpgradeLvl = 0;
+
+    [Header("Upgrade Parameter")]
+    private ProjectileData projectileData = new ProjectileData();
     [SerializeField] private UpgradePricedData rateUpgrade;
     public UpgradePricedData RateUpgrade => rateUpgrade;
     [SerializeField] private UpgradePricedData damageUpgrade;
@@ -85,30 +97,23 @@ public class Tower : MonoBehaviour
     public UpgradeData SpeedUpgrade => speedUpgrade;
     [SerializeField] private UpgradeData sideUpgrade;
     public UpgradeData SideUpgrade => sideUpgrade;
-
-    private GameManager gameManager;
-
-    private int towerLevel = 1;
-    private float towerExp = 0.0f;
-    [SerializeField] private AnimationCurve expToNextLvl;
-    [SerializeField] private TextMeshPro lvlText;
-    [SerializeField] private AnimationCurve levelBetweenUpgrade;
-    private int lastUpgradeLvl = 0;
     private ChoicePanel choicePanel;
-    [SerializeField] private List<SO_Upgrade> upgradesChoices;
+    [FormerlySerializedAs("upgradesChoices")] [SerializeField] private List<SO_Upgrade> upgradesOrder;
+    [SerializeField] private List<SO_Upgrade> infiniteUpgrades;
 
     private void Start()
     {
-        UpdateAfterUpgrade();
         mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
         mySpriteRenderer.color = Color.white;
-        particleSystem = GetComponent<ParticleSystem>();
+        projectileParticleSystem = GetComponent<ParticleSystem>();
         gameManager = FindObjectOfType<GameManager>();
         lvlText.text = towerLevel.ToString();
         choicePanel = FindObjectOfType<ChoicePanel>();
+
+        UpdateFromLevel();
     }
 
-    private void UpdateAfterUpgrade()
+    private void UpdateFromLevel()
     {
         rateUpgrade.UpdatePrice();
         fireRate = rateUpgrade.GetUpgradeValue();
@@ -121,7 +126,7 @@ public class Tower : MonoBehaviour
         sideCanonAngle = sideUpgrade.GetUpgradeValue();
     }
 
-    public Vector2 RotateVec(Vector2 v, float delta)
+    public static Vector2 RotateVec(Vector2 v, float delta)
     {
         return new Vector2(
             v.x * Mathf.Cos(delta) - v.y * Mathf.Sin(delta),
@@ -129,12 +134,10 @@ public class Tower : MonoBehaviour
         );
     }
 
-    private void Update()
+    private Enemy FindNearestEnemy()
     {
-        fireTimer += Time.deltaTime;
-
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, fireRange, layerMask);
-        Enemy enemy = null;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, fireRange, enemyLayerMask);
+        nearestEnemy = null;
         if (colliders.Length > 0)
         {
             int minIndex = 0;
@@ -149,52 +152,66 @@ public class Tower : MonoBehaviour
                 }
             }
 
-            enemy = colliders[minIndex].GetComponent<Enemy>();
+            nearestEnemy = colliders[minIndex].GetComponent<Enemy>();
         }
-        activated = enemy != null;
+
+        return nearestEnemy;
+    }
+
+    private void ShootProjectile(Vector3 direction)
+    {
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle -= 90;
+        mySpriteRenderer.transform.eulerAngles = Vector3.forward * angle;
+
+        ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
+        direction.Normalize();
+        emitParams.velocity = direction * projectileData.speed;
+        emitParams.startLifetime = fireRange / projectileData.speed;
+        emitParams.startSize = projectileData.size;
+
+        float xRange = canonSeperation * (canonCount - 1);
+        for (int i = 0; i < canonCount; i++)
+        {
+            float percent = canonCount > 1 ? (float)i / (canonCount - 1) : 0;
+            float xPos = Mathf.Lerp(-xRange, xRange, percent);
+            emitParams.position = Vector3.right * xPos;
+            projectileParticleSystem.Emit(emitParams, 1);
+        }
+        for (int i = 1; i <= sideCanon; i++)
+        {
+            emitParams.startSize = projectileData.size / 2.0f;
+
+            float sideAngle = Mathf.LerpAngle(0, sideCanonAngle, ((float)i / sideCanon));
+            Vector2 directionR = RotateVec(direction, -sideAngle * Mathf.Deg2Rad);
+            directionR.Normalize();
+            emitParams.velocity = directionR * projectileData.speed;
+            emitParams.position = Vector3.right * xRange;
+            projectileParticleSystem.Emit(emitParams, 1);
+            Vector2 directionL = RotateVec(direction, sideAngle * Mathf.Deg2Rad);
+            directionL.Normalize();
+            emitParams.velocity = directionL * projectileData.speed;
+            emitParams.position = Vector3.right * -xRange;
+            projectileParticleSystem.Emit(emitParams, 1);
+        }
+    }
+
+    private void Update()
+    {
+        fireTimer += Time.deltaTime;
+
+        nearestEnemy = FindNearestEnemy();
+        activated = nearestEnemy != null;
 
         if (activated)
         {
             mySpriteRenderer.color = Color.blue;
             if (fireTimer >= fireRate)
             {
-                ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
-                Vector3 direction = enemy.transform.position -
-                                    transform.position + 
-                                    (Vector3) enemy.Direction() * 0.01f;
-                direction.Normalize();
-                emitParams.velocity = direction * projectileData.speed;
-                emitParams.startLifetime = fireRange / projectileData.speed;
-                emitParams.startSize = projectileData.size;
-
-                float xRange = canonSeperation * (canonCount - 1);
-                for (int i = 0; i < canonCount; i++)
-                {
-                    float percent = canonCount > 1 ? (float)i / (canonCount - 1) : 0;
-                    float xPos = Mathf.Lerp(-xRange, xRange, percent);
-                    emitParams.position = Vector3.right * xPos;
-                    particleSystem.Emit(emitParams, 1);
-                }
-                for (int i = 1; i <= sideCanon; i++)
-                {
-                    emitParams.startSize = projectileData.size / 2.0f;
-
-                    float sideAngle = Mathf.LerpAngle(0, sideCanonAngle, ((float)i / sideCanon));
-                    Vector2 directionR = RotateVec(direction, -sideAngle * Mathf.Deg2Rad);
-                    directionR.Normalize();
-                    emitParams.velocity = directionR * projectileData.speed;
-                    emitParams.position = Vector3.right * xRange;
-                    particleSystem.Emit(emitParams, 1);
-                    Vector2 directionL = RotateVec(direction, sideAngle * Mathf.Deg2Rad);
-                    directionL.Normalize();
-                    emitParams.velocity = directionL * projectileData.speed;
-                    emitParams.position = Vector3.right * -xRange;
-                    particleSystem.Emit(emitParams, 1);
-                }
-
-                //GameObject gameObject = Instantiate(projectile, transform.position, transform.rotation, transform);
-                //gameObject.GetComponent<Projectile>().Direction = direction ;
-
+                Vector3 direction = nearestEnemy.transform.position -
+                                    transform.position +
+                                    (Vector3)nearestEnemy.Direction() * 0.01f;
+                ShootProjectile(direction);
                 fireTimer = 0.0f;
             }
         }
@@ -206,12 +223,17 @@ public class Tower : MonoBehaviour
 
     private void OnMouseDown()
     {
-        activated = true;
-    }
-
-    private void OnMouseUp()
-    {
-        activated = false;
+        if (activated)
+        {
+            Vector3 direction = nearestEnemy.transform.position -
+                                transform.position +
+                                (Vector3)nearestEnemy.Direction() * 0.01f;
+            ShootProjectile(direction);
+        }
+        else
+        {
+            ShootProjectile(Vector3.up);
+        }
     }
 
     private void OnDrawGizmos()
@@ -240,9 +262,9 @@ public class Tower : MonoBehaviour
         projectileData.damage += 0.5f;
     }
 
-    public void Kill (int reward, float experience)
+    public void Kill(int reward, float experience)
     {
-        gameManager.AddMoney(reward);
+        gameManager.AddMoney(Mathf.FloorToInt(reward * projectileData.rewardMult));
         towerExp += experience;
         if (towerExp > expToNextLvl.Evaluate(towerLevel))
         {
@@ -270,13 +292,13 @@ public class Tower : MonoBehaviour
 
     public void DisplayUpgrades()
     {
-        choicePanel.Display(this, upgradesChoices[0], upgradesChoices[1]);
+        choicePanel.Display(this, upgradesOrder[0], upgradesOrder[1]);
     }
 
     public void ValidateUpgrade(int choice)
     {
         lastUpgradeLvl += Mathf.FloorToInt(levelBetweenUpgrade.Evaluate(towerLevel));
-        switch (upgradesChoices[choice].UpgradeType)
+        switch (upgradesOrder[choice].UpgradeType)
         {
             case SO_Upgrade.UpgradeTypeEnum.SIDE:
                 sideCanon++;
@@ -300,10 +322,11 @@ public class Tower : MonoBehaviour
             default:
                 break;
         }
-        UpdateAfterUpgrade();
-        if (upgradesChoices.Count > 2)
+        UpdateFromLevel();
+        upgradesOrder.RemoveAt(choice);
+        if (upgradesOrder.Count < 2)
         {
-            upgradesChoices.RemoveAt(choice);
+            upgradesOrder.Add(infiniteUpgrades[Random.Range(0, infiniteUpgrades.Count-1)]);
         }
     }
 }

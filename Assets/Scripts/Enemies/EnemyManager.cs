@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 
@@ -56,7 +57,22 @@ public class EnemyPoolManager
     {
         poolActive[enemyId] = false;
         pool[enemyId].transform.position = enemyManagerTransform.position;
+        pool[enemyId].transform.localScale = Vector3.one;
         pool[enemyId].gameObject.SetActive(false);
+    }
+
+    public List<int> GetActive()
+    {
+        List<int> activeId = new List<int>();
+        for (int i = 0; i < poolActive.Length; i++)
+        {
+            if (poolActive[i])
+            {
+                activeId.Add(i);
+            }
+        }
+
+        return activeId;
     }
 
     public Enemy GetEnemy(int id)
@@ -68,14 +84,18 @@ public class EnemyPoolManager
 public class EnemyManager : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
-    [SerializeField] private float xRange = 2.0f;
-
+    [SerializeField] private float spawnXRange = 2.0f;
+    private EnemyPoolManager pool;
+    
     [SerializeField] private float pauseDuration = 2.0f;
+    private bool isWaiting = true;
 
     private Wave currentWave = new Wave();
+    [SerializeField] private SO_Enemy bossData;
+    private bool bossToSpawn = false;
+
     private float timer = 0.0f;
-    private bool isWaiting = true;
-    private EnemyPoolManager pool;
+
 
     private WaveManager waveManager;
 
@@ -107,17 +127,23 @@ public class EnemyManager : MonoBehaviour
 
             return;
         }
-        if (currentWave.enemyNb > currentWave.currentEnemySpawned)
+        if (bossToSpawn)
+        {
+            SpawnBoss();
+            bossToSpawn = false;
+            currentWave.CurrentEnemySpawned++;
+        }
+        if (currentWave.EnemyNb > currentWave.CurrentEnemySpawned)
         {
             timer += Time.deltaTime;
-            if (timer > currentWave.spawnRate)
+            if (timer > currentWave.SpawnRate)
             {
                 SpawnEnemy();
                 timer = 0.0f;
-                currentWave.currentEnemySpawned++;
+                currentWave.CurrentEnemySpawned++;
             }
         }
-        if (currentWave.enemyNb <= currentWave.currentEnemyKilled)
+        if (currentWave.EnemyNb <= currentWave.CurrentEnemyKilled)
         {
             isWaiting = true;
             timer = 0.0f;
@@ -131,33 +157,54 @@ public class EnemyManager : MonoBehaviour
     {
         if (tower)
         {
-            tower.Kill(pool.GetEnemy(enemyId).EnemyData.Reward, pool.GetEnemy(enemyId).EnemyData.Experience);
+            tower.Kill(pool.GetEnemy(enemyId).EnemyData.Reward,
+                pool.GetEnemy(enemyId).EnemyData.Experience);
+            currentWave.CurrentEnemyKilled++;
+            gameManager.DisplayWaveProgress(currentWave.CurrentEnemyKilled,
+                currentWave.EnemyNb);
         }
 
         pool.FreeObject(enemyId);
-        currentWave.currentEnemyKilled++;
-        gameManager.DisplayWaveProgress(currentWave.currentEnemyKilled, currentWave.enemyNb);
+    }
+
+    private void SpawnBoss()
+    {
+        Vector3 pos = transform.position;
+        int enemyId = pool.ActiveObject();
+        Enemy newEnemy = pool.GetEnemy(enemyId);
+        newEnemy.transform.position = pos;
+        SO_Enemy enemyType = bossData;
+        newEnemy.Spawn(currentWave.EnemySpeed, currentWave.EnemyLife, enemyType);
     }
 
     private void SpawnEnemy()
     {
-        Vector3 pos = transform.position + Vector3.right * Random.Range(-xRange, xRange);
+        Vector3 pos = transform.position + Vector3.right * Random.Range(-spawnXRange, spawnXRange);
         int enemyId = pool.ActiveObject();
         Enemy newEnemy = pool.GetEnemy(enemyId);
-        newEnemy.transform.position = pos; 
-        newEnemy.Spawn(currentWave.enemySpeed, currentWave.enemyLife, currentWave.enemyType);
+        newEnemy.transform.position = pos;
+        SO_Enemy enemyType =
+            currentWave.EnemyFormation.enemyTypes[Random.Range(0, currentWave.EnemyFormation.enemyTypes.Count)];
+        newEnemy.Spawn(currentWave.EnemySpeed, currentWave.EnemyLife, enemyType);
     }
 
     void CalculateNewWave()
     {
         currentWave = waveManager.CalculateNextWave();
+        bossToSpawn = currentWave.BossWave;
         isWaiting = true;
         timer = 0.0f;
     }
 
     public void ResetWave(Wave wave)
     {
+        List<int> activeId = pool.GetActive();
+        foreach (int id in activeId)
+        {
+            Kill(id, null);
+        }
         currentWave = wave;
+        bossToSpawn = currentWave.BossWave;
         isWaiting = true;
         timer = 0.0f;
     }
