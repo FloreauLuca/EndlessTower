@@ -79,4 +79,9 @@ public class TowerManager : MonoBehaviour
         }
         gameManager.UpdatesDone();
     }
+
+    public bool NewTowerAvailable()
+    {
+        return TOWER_COUNT > activeTower;
+    }
 }

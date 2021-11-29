@@ -103,6 +103,7 @@ public class EnemyManager : MonoBehaviour
     private WaveManager waveManager;
 
     private GameManager gameManager;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -111,6 +112,7 @@ public class EnemyManager : MonoBehaviour
 
         waveManager = FindObjectOfType<WaveManager>();
         gameManager = FindObjectOfType<GameManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -177,6 +179,7 @@ public class EnemyManager : MonoBehaviour
             currentWave.CurrentEnemyKilled++;
             gameManager.DisplayWaveProgress(currentWave.CurrentEnemyKilled,
                 currentWave.EnemyNb);
+            audioSource.Play();
         }
 
         pool.FreeObject(enemyId);

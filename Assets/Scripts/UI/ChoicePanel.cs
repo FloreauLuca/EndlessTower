@@ -15,10 +15,12 @@ public class ChoicePanel : MonoBehaviour
     [SerializeField] private AnimationCurve fadeCurve;
     private Tower tower;
     private int choice = -1;
+    private AudioSource audioSource;
 
     private void Start()
     {
         canvasGroup.alpha = 0;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Display(Tower tower, SO_Upgrade choice1, SO_Upgrade choice2)
@@ -30,6 +32,7 @@ public class ChoicePanel : MonoBehaviour
         StopAllCoroutines();
         canvasGroup.alpha = 1;
         this.choice = -1;
+        audioSource.Play();
     }
 
     public void Validate(int choice)

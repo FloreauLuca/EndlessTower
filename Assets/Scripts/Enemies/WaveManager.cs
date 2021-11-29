@@ -22,11 +22,15 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private List<SO_EnemyFormation> enemyFormation = new List<SO_EnemyFormation>();
     private GameManager gameManager;
     private EnemyManager enemyManager;
-
+    [Tooltip("100 waves = 1.0")]
     [SerializeField] private AnimationCurve enemyNbCurve;
+    [Tooltip("100 waves = 1.0")]
     [SerializeField] private AnimationCurve enemyLifeCurve;
+    [Tooltip("100 waves = 1.0")]
     [SerializeField] private AnimationCurve spawnRateCurve;
+    [Tooltip("100 waves = 1.0")]
     [SerializeField] private AnimationCurve enemySpeedCurve;
+    [Tooltip("100 waves = 1.0")]
     [SerializeField] private AnimationCurve enemyTypeCurve;
     [SerializeField] private int bossWave = 10;
 
@@ -45,7 +49,7 @@ public class WaveManager : MonoBehaviour
         wave.EnemyLife = Mathf.RoundToInt(enemyLifeCurve.Evaluate(currentWaveCount / 100.0f));
         wave.SpawnRate = spawnRateCurve.Evaluate(currentWaveCount / 100.0f);
         wave.EnemySpeed = enemySpeedCurve.Evaluate(currentWaveCount / 100.0f);
-        wave.EnemyFormation = enemyFormation[Mathf.RoundToInt(enemyTypeCurve.Evaluate(currentWaveCount / 100.0f))%3];
+        wave.EnemyFormation = enemyFormation[Mathf.RoundToInt(enemyTypeCurve.Evaluate(currentWaveCount / 100.0f))];
         wave.CurrentEnemyKilled = 0;
         wave.CurrentEnemySpawned = 0;
         wave.BossWave = currentWaveCount % bossWave == 0;

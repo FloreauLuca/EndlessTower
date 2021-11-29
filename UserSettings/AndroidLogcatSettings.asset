@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "ce011821cd21e8760d",
     "m_SelectedPackage": {
-        "deviceId": "",
-        "name": "",
-        "processId": 0,
+        "deviceId": "ce011821cd21e8760d",
+        "name": "com.KiddyProd.EndlessTower",
+        "processId": 8171,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -18,6 +18,18 @@
             "deviceId": "ce011821cd21e8760d",
             "name": "com.sec.android.app.myfiles",
             "processId": 526,
+            "exited": true
+        },
+        {
+            "deviceId": "ce011821cd21e8760d",
+            "name": "com.KiddyProd.EndlessTower",
+            "processId": 24503,
+            "exited": true
+        },
+        {
+            "deviceId": "ce011821cd21e8760d",
+            "name": "com.KiddyProd.EndlessTower",
+            "processId": 8171,
             "exited": false
         }
     ],

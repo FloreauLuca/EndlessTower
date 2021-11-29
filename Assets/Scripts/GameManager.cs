@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     private UIManager uiManager;
     private WaveManager waveManager;
     private TowerManager towerManager;
+    [SerializeField] private AudioSource audioSource;
 
     private int money = 0;
     public int Money => money;
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
     public void LooseLife()
     {
         waveManager.ResetWave();
+        audioSource.Play();
     }
 
     public void UpdatesDone()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemySquare
   m_EditorClassIdentifier: 
   Sprite: {fileID: 21300000, guid: 9e38671ed53eff74aba37dbaddacc837, type: 3}
-  Color: {r: 0.81062824, g: 0.5424528, b: 1, a: 1}
+  Color: {r: 0.5411765, g: 1, b: 0.7918768, a: 1}
   DirectionType: 0
   Speed: 0.5
   Life: 1.5

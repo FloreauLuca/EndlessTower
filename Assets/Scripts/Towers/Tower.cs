@@ -55,8 +55,11 @@ public class UpgradePricedData : UpgradeData
 public class Tower : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer towerSpriteRenderer;
+    [SerializeField] private Color fireColor;
 
     private GameManager gameManager;
+    private AudioSource audioSource;
+    private TowerManager towerManager;
 
     private bool activated = false;
 
@@ -105,7 +108,11 @@ public class Tower : MonoBehaviour
     {
         towerSpriteRenderer.color = Color.white;
         projectileParticleSystem = GetComponent<ParticleSystem>();
+
         gameManager = FindObjectOfType<GameManager>();
+        audioSource = GetComponent<AudioSource>();
+        towerManager = FindObjectOfType<TowerManager>();
+
         lvlText.text = towerLevel.ToString();
         choicePanel = FindObjectOfType<ChoicePanel>();
 
@@ -133,6 +140,7 @@ public class Tower : MonoBehaviour
         );
     }
 
+    //Find the enemy closest to the line
     private Enemy FindNearestEnemy()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, fireRange, enemyLayerMask);
@@ -140,10 +148,10 @@ public class Tower : MonoBehaviour
         if (colliders.Length > 0)
         {
             int minIndex = 0;
-            float minDist = Vector3.SqrMagnitude(colliders[minIndex].transform.position - transform.position);
+            float minDist = Mathf.Abs(colliders[minIndex].transform.position.y - transform.position.y);
             for (int i = 1; i < colliders.Length; i++)
             {
-                float dist = Vector3.SqrMagnitude(colliders[i].transform.position - transform.position);
+                float dist = Mathf.Abs(colliders[i].transform.position.y - transform.position.y);
                 if (dist < minDist)
                 {
                     minIndex = i;
@@ -177,6 +185,8 @@ public class Tower : MonoBehaviour
             emitParams.position = Vector3.right * xPos;
             projectileParticleSystem.Emit(emitParams, 1);
         }
+
+        //Shoot side projectile
         for (int i = 1; i <= sideCanon; i++)
         {
             emitParams.startSize = projectileData.size / 2.0f;
@@ -193,6 +203,7 @@ public class Tower : MonoBehaviour
             emitParams.position = Vector3.right * -xRange;
             projectileParticleSystem.Emit(emitParams, 1);
         }
+        audioSource.Play();
     }
 
     private void Update()
@@ -204,7 +215,7 @@ public class Tower : MonoBehaviour
 
         if (activated)
         {
-            towerSpriteRenderer.color = Color.blue;
+            towerSpriteRenderer.color = fireColor;
             if (fireTimer >= fireRate)
             {
                 Vector3 direction = nearestEnemy.transform.position -
@@ -220,6 +231,7 @@ public class Tower : MonoBehaviour
         }
     }
 
+    //Also active for OnTouchDown
     private void OnMouseDown()
     {
         if (activated)
@@ -237,7 +249,7 @@ public class Tower : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = activated ? Color.blue : Color.white;
+        Gizmos.color = activated ? fireColor : Color.white;
         Gizmos.DrawWireSphere(transform.position, fireRange);
     }
 
@@ -290,6 +302,15 @@ public class Tower : MonoBehaviour
 
     public void DisplayUpgrades()
     {
+        if (upgradesOrder[0].UpgradeType == SO_Upgrade.UpgradeTypeEnum.ADD_TOURET && towerManager.NewTowerAvailable())
+        {
+            upgradesOrder.RemoveAt(0);
+        }
+        if (upgradesOrder[1].UpgradeType == SO_Upgrade.UpgradeTypeEnum.ADD_TOURET && towerManager.NewTowerAvailable())
+        {
+            upgradesOrder.RemoveAt(1);
+        }
+
         choicePanel.Display(this, upgradesOrder[0], upgradesOrder[1]);
     }
 
@@ -306,7 +327,7 @@ public class Tower : MonoBehaviour
                 canonCount++;
                 break;
             case SO_Upgrade.UpgradeTypeEnum.ADD_TOURET:
-                FindObjectOfType<TowerManager>().AddTower();
+                towerManager.AddTower();
                 break;
             case SO_Upgrade.UpgradeTypeEnum.INC_SIZE:
                 sizeUpgrade.AddLevel();
