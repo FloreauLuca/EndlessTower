@@ -96,6 +96,9 @@ public class EnemyManager : MonoBehaviour
 
     private float timer = 0.0f;
 
+    [SerializeField] private ParticleSystem deathParticleSystem;
+    [SerializeField] private ParticleSystem coinParticleSystem;
+
 
     private WaveManager waveManager;
 
@@ -157,8 +160,20 @@ public class EnemyManager : MonoBehaviour
     {
         if (tower)
         {
-            tower.Kill(pool.GetEnemy(enemyId).EnemyData.Reward,
-                pool.GetEnemy(enemyId).EnemyData.Experience);
+            Enemy enemy = pool.GetEnemy(enemyId);
+            SO_Enemy enemyData = enemy.EnemyData;
+
+            ParticleSystem.EmitParams particles = new ParticleSystem.EmitParams();
+            particles.position = enemy.transform.position - transform.position;
+            particles.applyShapeToPosition = true;
+
+            coinParticleSystem.Emit(particles, Mathf.CeilToInt(enemyData.Reward/2.0f));
+
+            particles.startColor = enemyData.Color;
+            deathParticleSystem.Emit(particles, 5);
+
+            tower.Kill(enemyData.Reward,
+                enemyData.Experience);
             currentWave.CurrentEnemyKilled++;
             gameManager.DisplayWaveProgress(currentWave.CurrentEnemyKilled,
                 currentWave.EnemyNb);

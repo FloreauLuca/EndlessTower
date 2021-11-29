@@ -16,6 +16,7 @@ MonoBehaviour:
   Color: {r: 0.81062824, g: 0.5424528, b: 1, a: 1}
   DirectionType: 0
   Speed: 0.5
-  Life: 2
+  Life: 1.5
   Reward: 10
   Experience: 10
+  Size: 1

@@ -54,7 +54,7 @@ public class UpgradePricedData : UpgradeData
 
 public class Tower : MonoBehaviour
 {
-    private SpriteRenderer mySpriteRenderer;
+    [SerializeField] private SpriteRenderer towerSpriteRenderer;
 
     private GameManager gameManager;
 
@@ -103,8 +103,7 @@ public class Tower : MonoBehaviour
 
     private void Start()
     {
-        mySpriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        mySpriteRenderer.color = Color.white;
+        towerSpriteRenderer.color = Color.white;
         projectileParticleSystem = GetComponent<ParticleSystem>();
         gameManager = FindObjectOfType<GameManager>();
         lvlText.text = towerLevel.ToString();
@@ -162,7 +161,7 @@ public class Tower : MonoBehaviour
     {
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle -= 90;
-        mySpriteRenderer.transform.eulerAngles = Vector3.forward * angle;
+        towerSpriteRenderer.transform.eulerAngles = Vector3.forward * angle;
 
         ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
         direction.Normalize();
@@ -205,7 +204,7 @@ public class Tower : MonoBehaviour
 
         if (activated)
         {
-            mySpriteRenderer.color = Color.blue;
+            towerSpriteRenderer.color = Color.blue;
             if (fireTimer >= fireRate)
             {
                 Vector3 direction = nearestEnemy.transform.position -
@@ -217,7 +216,7 @@ public class Tower : MonoBehaviour
         }
         else
         {
-            mySpriteRenderer.color = Color.white;
+            towerSpriteRenderer.color = Color.white;
         }
     }
 
@@ -251,15 +250,14 @@ public class Tower : MonoBehaviour
     {
         gameManager.RemoveMoney(rateUpgrade.Price);
         rateUpgrade.AddLevel();
-        fireRate -= 0.1f;
-        projectileData.speed += 0.1f;
+        UpdateFromLevel();
     }
 
     public void UpgradeDamage()
     {
         gameManager.RemoveMoney(damageUpgrade.Price);
         damageUpgrade.AddLevel();
-        projectileData.damage += 0.5f;
+        UpdateFromLevel();
     }
 
     public void Kill(int reward, float experience)
